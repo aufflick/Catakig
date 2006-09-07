@@ -1,0 +1,169 @@
+
+/Scale 30 def
+/Inch 72 Scale mul def
+/PageHeight Inch 11 mul def
+%/CR-does-LF false def
+
+/kfItalics		16#001 def
+/kfUnderline	16#002 def
+/kfExpanded		16#004 def
+/kfExpanded1L	16#008 def
+/kfCompressed	16#010 def
+/kfEmphasized	16#020 def
+/kfElite		16#040 def
+/kfDblStrike	16#080 def
+/kfSubscript	16#100 def
+/kfSuperscript	16#200 def
+/ToFontCode		16#300 string def
+
+0 1 16#2FF {
+	ToFontCode exch dup
+	  16#003 and
+	  <00040404> 2 index -2 bitshift 3 and get or
+	  <0018080810101010> 2 index -4 bitshift 7 and get or
+	  <002040406060> 2 index -7 bitshift get or
+	put
+} for
+
+/CurrentX	{currentpoint pop cvi} def % -- nX
+/CurrentY	{currentpoint exch pop cvi} def % -- nY
+/TurnOff	{not  Style and  /Style exch def} def % nFlags --
+/TurnOn		{     Style or   /Style exch def} def % nFlags --
+/SpcWidth	{(-- ) BlessString stringwidth pop mul} def % nSpaces -- width
+
+/G  {Inch exch idiv exch 0 exch ashow} def % sData nDotsPerHorizInch --
+/G0 { 60 G} def % sData --
+/G1 {120 G} def % sData --
+/G2 {120 G} def % sData --
+/G3 {240 G} def % sData --
+/G4 { 80 G} def % sData --
+/G6 { 90 G} def % sData --
+
+/E-4  {kfItalics TurnOn} def % --
+/E-5  {kfItalics TurnOff} def % --
+/E--1 {kfUnderline TurnOn} def % --
+/E--0 {kfUnderline TurnOff} def % --
+/E-E  {kfEmphasized TurnOn} def % --
+/E-F  {kfEmphasized TurnOff} def % --
+/E-G  {kfDblStrike TurnOn} def % --
+/E-H  {kfDblStrike TurnOff} def % --
+/E-W1 {kfExpanded TurnOn} def % --
+/E-W0 {kfExpanded kfExpanded1L or TurnOff} def % --
+/E-M  {kfElite TurnOn} def % --
+/E-P  {kfElite TurnOff} def % --
+/C-O  {kfCompressed TurnOn} def % --
+/C-R  {kfCompressed TurnOff} def % --
+/C-N  {kfExpanded1L TurnOn} def % --
+/C-T  {kfExpanded1L TurnOff} def % --
+/E-S0 {kfSuperscript TurnOn  kfSubscript TurnOff} def % --
+/E-S1 {kfSubscript TurnOn  kfSuperscript TurnOff} def % --
+/E-T  {kfSuperscript kfSubscript or TurnOff} def % --
+
+/E-3 {Scale mul 3 idiv  /LFDY exch def} def % n-216ths-inch --
+/E-A {Scale mul         /LFDY exch def} def % n-72nds-inch --
+/E-0 { 9 E-A} def % --
+/E-1 { 7 E-A} def % --
+/E-2 {12 E-A} def % --
+
+/E-C  {LFDY mul  SetFormLength} def % nLines -- % or sixths of an inch??
+/E-C0 {Inch mul  SetFormLength} def % nInches --
+
+/C-I % nReps --
+{
+    TabWidth mul  CurrentX TabWidth mod  sub 0 rmoveto
+    ClampX
+} def
+
+/C-L % nReps --
+{
+	{showpage} repeat
+    0  Inch 6 idiv 65 mul  moveto  % 0 or CurrentX ??
+} def
+
+/T    {BlessString show} def % string --
+/CR   {0 CurrentY moveto} def % --
+/C-M  {kfExpanded1L TurnOff  CR  pop} def % nReps --
+/C-J  {LFDY mul Down} def % nLines --
+/E-f1 {LFDY mul Down} def % nLines --
+/E-J  {Scale mul 3 idiv Down} def % n-216ths-inch --
+/C-H  {SpcWidth neg 0 rmoveto  ClampX} def % nReps --
+/E-l  {SpcWidth /LMargin exch def} def % nSpaces --
+/E-Q  {SpcWidth /RMargin exch def} def % nSpaces --
+
+/Down % nDeltaY --
+{
+	neg  0 exch rmoveto
+
+    CurrentY PageHeight 0 {
+		pop  0 PageHeight rmoveto  gsave showpage grestore
+	} for
+} def
+
+/BlessString % string --
+{
+	dup 0  127 put
+    dup 1  ToFontCode Style get  put
+} def
+
+/ClampX % --
+{
+    currentpoint exch cvi
+    dup LMargin lt {pop LMargin} if
+    dup RMargin gt {pop RMargin} if
+    exch moveto
+} def
+
+/Reset
+{
+	/LMargin 0 def
+	/RMargin 8 Inch mul def
+	/PageHeight Inch 11 mul def
+	/Style 0 def
+	/TabWidth Inch 8 mul 10 idiv def % fixed-size tabs!!
+	E-2  E-O
+} def
+
+%-----------------------------------------------------------------------------
+% incomplete routines!!
+
+/SetFormLength % nY --
+{
+    pop
+} def
+
+/E-O { } def % --
+/E-N {pop} def % nLines --
+/E-e0 {pop} def % n --
+/E-e1 {pop} def % n --
+/E-f0 {pop} def % n --
+
+
+
+/C-K % nReps --
+{
+	pop
+} def
+
+%-----------------------------------------------------------------------------
+
+/pdfmark where { pop [
+  /Creator (Catakig 2)
+  /Producer (http://catakig.sourceforge.net)
+  /DOCINFO pdfmark } if
+
+/setdistillerparams where { pop <<
+  %/CompatibilityLevel 1.4
+  %/PDFSETTINGS /printer
+  %/NeverEmbed [/Courier]
+  %/EmbedAllFonts true
+  /SubsetFonts true
+  /CompressFonts true
+  /CompressPages true
+  >> setdistillerparams } if
+
+18 0 translate
+0 784 moveto
+1. Scale div dup scale
+
+/Ibsen findfont /T0Font get  12 Scale mul  scalefont setfont
+Reset
