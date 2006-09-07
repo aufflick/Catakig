@@ -1,0 +1,52 @@
+{
+    IBClasses = (
+        {
+            CLASS = AboutPanel; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {mCursorCover = NSTextField; mVersion = NSControl; }; 
+            SUPERCLASS = NSPanel; 
+        }, 
+        {
+            ACTIONS = {newDocument = id; }; 
+            CLASS = AppController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {mNewA2ExtraRAM = NSControl; mNewA2Model = NSControl; mNewA2Panel = NSPanel; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {
+                ClearPrintSession = id; 
+                CopyScreenImage = id; 
+                CopyScreenText = id; 
+                HitDiskDrive = id; 
+                HitSpeedControl = id; 
+                PasteScreenText = id; 
+                SaveScreenImage = id; 
+                SignalReboot = id; 
+                SignalReset = id; 
+                ToggleColorVideo = id; 
+                ToggleFullScreen = id; 
+            }; 
+            CLASS = FirstResponder; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = NSMovie; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = NSOpenGLView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
+        {
+            ACTIONS = {StopModal = id; }; 
+            CLASS = NSPanel; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSWindow; 
+        }, 
+        {CLASS = NSView; LANGUAGE = ObjC; SUPERCLASS = NSResponder; }, 
+        {
+            ACTIONS = {HitJoystickControl = id; HitMonochromeHue = id; }; 
+            CLASS = PrefsPanel; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {mJoystickControl = NSMatrix; mMonochromeHue = NSColorWell; }; 
+            SUPERCLASS = NSPanel; 
+        }
+    ); 
+    IBVersion = 1; 
+}

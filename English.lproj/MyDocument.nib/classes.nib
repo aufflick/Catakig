@@ -1,0 +1,55 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {SignalReboot = id; SignalReset = id; }; 
+            CLASS = A2Computer; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSResponder; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = IndicatorLight; LANGUAGE = ObjC; SUPERCLASS = NSImageView; }, 
+        {
+            ACTIONS = {
+                ClearPrintSession = id; 
+                CopyScreenImage = id; 
+                CopyScreenText = id; 
+                HitDiskDrive = id; 
+                HitSpeedControl = id; 
+                PasteScreenText = id; 
+                SaveScreenImage = id; 
+            }; 
+            CLASS = MyDocument; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                mA2 = A2Computer; 
+                mDDrive0 = NSControl; 
+                mDDrive1 = NSControl; 
+                mModelEmblem = NSTextField; 
+                mPrSessionAddSuffix = NSControl; 
+                mPrSessionFilter = NSControl; 
+                mPrSessionSize = NSTextField; 
+                mPrSessionView = NSView; 
+                mSaveImageAddSuffix = NSControl; 
+                mSaveImageTypes = NSControl; 
+                mSaveImageView = NSView; 
+                mScreen = ScreenView; 
+                mSpeedLight = IndicatorLight; 
+            }; 
+            SUPERCLASS = NSDocument; 
+        }, 
+        {
+            ACTIONS = {ToggleColorVideo = id; ToggleFullScreen = id; }; 
+            CLASS = ScreenView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                mA2 = A2Computer; 
+                mDDLight0 = IndicatorLight; 
+                mDDLight1 = IndicatorLight; 
+                mDocument = MyDocument; 
+                mPrinterLight = IndicatorLight; 
+            }; 
+            SUPERCLASS = NSOpenGLView; 
+        }
+    ); 
+    IBVersion = 1; 
+}
