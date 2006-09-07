@@ -1,0 +1,39 @@
+// 'common.xcconfig'
+// Common configration settings for all targets.
+
+
+PRODUCT_NAME				= Catakig
+WRAPPER_EXTENSION			= app
+//CURRENT_PROJECT_VERSION	= 2.00b2
+//APP_VERSION		= 2.00b2 // custom variable
+
+INFOPLIST_FILE					= Info.plist
+GCC_PREFIX_HEADER				= Source/Prefix.pch
+GCC_PRECOMPILE_PREFIX_HEADER	= YES
+GCC_PFE_FILE_C_DIALECTS			= objective-c
+	// c
+
+GCC_INPUT_FILETYPE				= sourcecode.c.objc
+//GCC_INPUT_FILETYPE			= automatic
+	 // "Compile Sources as"
+GCC_C_LANGUAGE_STANDARD			= c99
+GCC_ENABLE_OBJC_EXCEPTIONS		= YES
+GCC_WARN_UNUSED_VARIABLE		= NO
+GCC_WARN_ABOUT_RETURN_TYPE		= YES
+
+GCC_VERSION_ppc		= 4.0 // 3.3
+GCC_VERSION_i386	= 4.0
+
+//SDKROOT		= /Developer/SDKs/MacOSX10.3.9.sdk
+SDKROOT_ppc		= /Developer/SDKs/MacOSX10.3.9.sdk
+SDKROOT_i386	= /Developer/SDKs/MacOSX10.4u.sdk
+
+//MACOSX_DEPLOYMENT_TARGET		= 10.3
+MACOSX_DEPLOYMENT_TARGET_ppc	= 10.3
+MACOSX_DEPLOYMENT_TARGET_i386	= 10.4
+
+OTHER_LDFLAGS = -lz
+	// -lbz2
+//OTHER_LDFLAGS = -flag1 -flag2 $(OTHER_LDFLAGS_$(CURRENT_ARCH)) 
+//OTHER_LDFLAGS_ppc = -ppc_specific_flag 
+//OTHER_LDFLAGS_i386 = -intel_specific_flag 
