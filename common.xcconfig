@@ -1,17 +1,16 @@
 // 'common.xcconfig'
-// Common configration settings for all targets.
+// Common XCode configration settings for all targets.
 
 
 PRODUCT_NAME				= Catakig
 WRAPPER_EXTENSION			= app
 //CURRENT_PROJECT_VERSION	= 2.00b2
-//APP_VERSION		= 2.00b2 // custom variable
+App_Version					= 2.00b2 // custom variable
 
 INFOPLIST_FILE					= Info.plist
 GCC_PREFIX_HEADER				= Source/Prefix.pch
 GCC_PRECOMPILE_PREFIX_HEADER	= YES
-GCC_PFE_FILE_C_DIALECTS			= objective-c
-	// c
+GCC_PFE_FILE_C_DIALECTS			= c objective-c
 
 GCC_INPUT_FILETYPE				= sourcecode.c.objc
 //GCC_INPUT_FILETYPE			= automatic

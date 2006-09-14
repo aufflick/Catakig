@@ -7,10 +7,9 @@
             SUPERCLASS = NSPanel; 
         }, 
         {
-            ACTIONS = {newDocument = id; }; 
             CLASS = AppController; 
             LANGUAGE = ObjC; 
-            OUTLETS = {mNewA2ExtraRAM = NSControl; mNewA2Model = NSControl; mNewA2Panel = NSPanel; }; 
+            OUTLETS = {mNewA2ExtraRAM = NSControl; mNewA2Model = NSMatrix; mNewA2Panel = NSPanel; }; 
             SUPERCLASS = NSObject; 
         }, 
         {
@@ -31,6 +30,7 @@
             LANGUAGE = ObjC; 
             SUPERCLASS = NSObject; 
         }, 
+        {CLASS = MyApplication; LANGUAGE = ObjC; SUPERCLASS = NSApplication; }, 
         {CLASS = NSMovie; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {CLASS = NSOpenGLView; LANGUAGE = ObjC; SUPERCLASS = NSView; }, 
         {

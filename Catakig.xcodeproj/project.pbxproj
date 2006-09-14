@@ -13,7 +13,7 @@
 		280F4D3C0A89017C000B3B80 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 280F4D330A89017C000B3B80 /* main.m */; };
 		280F4D3E0A89017C000B3B80 /* PrefsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 280F4D370A89017C000B3B80 /* PrefsPanel.m */; };
 		280F4D3F0A89017C000B3B80 /* ScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 280F4D390A89017C000B3B80 /* ScreenView.m */; };
-		2835D3370A9794D1002E018A /* MyDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 2835D3360A9794D1002E018A /* MyDocument.m */; };
+		2835D3370A9794D1002E018A /* Audio.m in Sources */ = {isa = PBXBuildFile; fileRef = 2835D3360A9794D1002E018A /* Audio.m */; };
 		2835D33C0A9795B9002E018A /* Actions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2835D33B0A9795B9002E018A /* Actions.m */; };
 		283EDFBA0A8BAE2100065960 /* MU-OpenGLContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 283EDFB90A8BAE2100065960 /* MU-OpenGLContext.m */; };
 		285BF27F0A926BE7003F6BAC /* A2DiskDrive.m in Sources */ = {isa = PBXBuildFile; fileRef = 285BF27C0A926BB2003F6BAC /* A2DiskDrive.m */; };
@@ -31,6 +31,7 @@
 		287238870A87B53B006AA610 /* Video.m in Sources */ = {isa = PBXBuildFile; fileRef = 287238820A87B53B006AA610 /* Video.m */; };
 		28736F100A94F6700013975E /* Printing.l in Sources */ = {isa = PBXBuildFile; fileRef = 28736F0F0A94F6700013975E /* Printing.l */; };
 		2878B28D0A93ABBC0084BF5E /* MU-Object.m in Sources */ = {isa = PBXBuildFile; fileRef = 2878B28C0A93ABBC0084BF5E /* MU-Object.m */; };
+		287D19920AB4920B00CCB6E2 /* MyDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 287D19910AB4920B00CCB6E2 /* MyDocument.m */; };
 		288D488F0A8CEB6400327F4A /* ROM.m in Sources */ = {isa = PBXBuildFile; fileRef = 288D488E0A8CEB6400327F4A /* ROM.m */; };
 		289663F90A90111700A49F71 /* AboutBoxPanel1.png in Resources */ = {isa = PBXBuildFile; fileRef = 289663F10A90111700A49F71 /* AboutBoxPanel1.png */; };
 		289663FA0A90111700A49F71 /* Application.icns in Resources */ = {isa = PBXBuildFile; fileRef = 289663F20A90111700A49F71 /* Application.icns */; };
@@ -75,8 +76,9 @@
 		280F4D370A89017C000B3B80 /* PrefsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefsPanel.m; sourceTree = "<group>"; };
 		280F4D380A89017C000B3B80 /* ScreenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenView.h; sourceTree = "<group>"; };
 		280F4D390A89017C000B3B80 /* ScreenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenView.m; sourceTree = "<group>"; };
-		2818CD090AA4C9790002F245 /* __Notes-to-self.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "__Notes-to-self.txt"; sourceTree = "<group>"; };
-		2835D3360A9794D1002E018A /* MyDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDocument.m; sourceTree = "<group>"; };
+		28179BED0AB2029E00686944 /* XCode.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = XCode.txt; sourceTree = "<group>"; };
+		2818CD090AA4C9790002F245 /* Notes-to-self.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Notes-to-self.txt"; sourceTree = "<group>"; };
+		2835D3360A9794D1002E018A /* Audio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Audio.m; sourceTree = "<group>"; };
 		2835D33B0A9795B9002E018A /* Actions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Actions.m; sourceTree = "<group>"; };
 		283EDFB90A8BAE2100065960 /* MU-OpenGLContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MU-OpenGLContext.m"; sourceTree = "<group>"; };
 		285BF2460A926901003F6BAC /* CPU-Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPU-Macros.h"; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 		287238820A87B53B006AA610 /* Video.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Video.m; sourceTree = "<group>"; };
 		28736F0F0A94F6700013975E /* Printing.l */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.lex; path = Printing.l; sourceTree = "<group>"; };
 		2878B28C0A93ABBC0084BF5E /* MU-Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MU-Object.m"; sourceTree = "<group>"; };
+		287D19910AB4920B00CCB6E2 /* MyDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDocument.m; sourceTree = "<group>"; };
 		288B38700A9604DF00D20934 /* To-do-Cocoa.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "To-do-Cocoa.txt"; sourceTree = "<group>"; };
 		288B38710A9604DF00D20934 /* To-do-LibAppleII.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "To-do-LibAppleII.txt"; sourceTree = "<group>"; };
 		288D488E0A8CEB6400327F4A /* ROM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROM.m; sourceTree = "<group>"; };
@@ -131,7 +134,7 @@
 		2A37F4B7FDCFA73011CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		8D15AC370486D014006FF6A4 /* Catakig.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Catakig.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D15AC370486D014006FF6A4 /* Catakig.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catakig.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,8 +197,9 @@
 		2835D3350A9794D1002E018A /* MyDocument */ = {
 			isa = PBXGroup;
 			children = (
-				2835D3360A9794D1002E018A /* MyDocument.m */,
 				2835D33B0A9795B9002E018A /* Actions.m */,
+				2835D3360A9794D1002E018A /* Audio.m */,
+				287D19910AB4920B00CCB6E2 /* MyDocument.m */,
 			);
 			path = MyDocument;
 			sourceTree = "<group>";
@@ -245,9 +249,10 @@
 		288B386F0A9604DF00D20934 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
-				2818CD090AA4C9790002F245 /* __Notes-to-self.txt */,
+				2818CD090AA4C9790002F245 /* Notes-to-self.txt */,
 				288B38700A9604DF00D20934 /* To-do-Cocoa.txt */,
 				288B38710A9604DF00D20934 /* To-do-LibAppleII.txt */,
+				28179BED0AB2029E00686944 /* XCode.txt */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
@@ -417,10 +422,11 @@
 				285BF27F0A926BE7003F6BAC /* A2DiskDrive.m in Sources */,
 				2878B28D0A93ABBC0084BF5E /* MU-Object.m in Sources */,
 				28736F100A94F6700013975E /* Printing.l in Sources */,
-				2835D3370A9794D1002E018A /* MyDocument.m in Sources */,
+				2835D3370A9794D1002E018A /* Audio.m in Sources */,
 				2835D33C0A9795B9002E018A /* Actions.m in Sources */,
 				2861690D0A9A06A200E398F8 /* MU-UserDefaults.m in Sources */,
 				28D98A8F0AAF4EB20012BCAD /* MyApplication.m in Sources */,
+				287D19920AB4920B00CCB6E2 /* MyDocument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

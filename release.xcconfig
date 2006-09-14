@@ -1,6 +1,6 @@
 #include "common" // file 'common.xcconfig'
 
-GCC_OPTIMIZATION_LEVEL			= 3
+GCC_OPTIMIZATION_LEVEL			= s
 GCC_DYNAMIC_NO_PIC				= YES
 GCC_GENERATE_DEBUGGING_SYMBOLS	= NO
 
