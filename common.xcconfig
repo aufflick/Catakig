@@ -1,11 +1,11 @@
-// 'common.xcconfig'
-// Common XCode configration settings for all targets.
+// 'common.xcconfig' -- a set of common XCode configration settings
+// shared by all targets.
 
+App_Version					= 2.00b2
 
 PRODUCT_NAME				= Catakig
 WRAPPER_EXTENSION			= app
-//CURRENT_PROJECT_VERSION	= 2.00b2
-App_Version					= 2.00b2 // custom variable
+//CURRENT_PROJECT_VERSION	= x.x.x
 
 INFOPLIST_FILE					= Info.plist
 GCC_PREFIX_HEADER				= Source/Prefix.pch
@@ -17,9 +17,9 @@ GCC_INPUT_FILETYPE				= sourcecode.c.objc
 	 // "Compile Sources as"
 GCC_C_LANGUAGE_STANDARD			= c99
 GCC_ENABLE_OBJC_EXCEPTIONS		= YES
-GCC_WARN_UNUSED_VARIABLE		= NO
-GCC_WARN_ABOUT_RETURN_TYPE		= YES
+GCC_STRICT_ALIASING				= YES
 
+//GCC_VERSION		= 4.0
 GCC_VERSION_ppc		= 4.0 // 3.3
 GCC_VERSION_i386	= 4.0
 
@@ -31,8 +31,17 @@ SDKROOT_i386	= /Developer/SDKs/MacOSX10.4u.sdk
 MACOSX_DEPLOYMENT_TARGET_ppc	= 10.3
 MACOSX_DEPLOYMENT_TARGET_i386	= 10.4
 
-OTHER_LDFLAGS = -lz
-	// -lbz2
+OTHER_LDFLAGS = -lz -lbz2
 //OTHER_LDFLAGS = -flag1 -flag2 $(OTHER_LDFLAGS_$(CURRENT_ARCH)) 
 //OTHER_LDFLAGS_ppc = -ppc_specific_flag 
 //OTHER_LDFLAGS_i386 = -intel_specific_flag 
+
+//OTHER_CFLAGS_i386 = -fobjc-direct-dispatch
+
+// ==== Warnings ====
+
+GCC_WARN_UNUSED_VARIABLE					= NO
+GCC_WARN_ABOUT_RETURN_TYPE					= YES
+GCC_WARN_ABOUT_MISSING_PROTOTYPES			= YES
+//GCC_WARN_SIGN_COMPARE						= YES
+
