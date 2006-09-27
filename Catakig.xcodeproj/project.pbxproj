@@ -13,7 +13,7 @@
 		280F4D3C0A89017C000B3B80 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 280F4D330A89017C000B3B80 /* main.m */; };
 		280F4D3E0A89017C000B3B80 /* PrefsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 280F4D370A89017C000B3B80 /* PrefsPanel.m */; };
 		280F4D3F0A89017C000B3B80 /* ScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 280F4D390A89017C000B3B80 /* ScreenView.m */; };
-		2835D3370A9794D1002E018A /* Run.m in Sources */ = {isa = PBXBuildFile; fileRef = 2835D3360A9794D1002E018A /* Run.m */; };
+		2835D3370A9794D1002E018A /* Audio.m in Sources */ = {isa = PBXBuildFile; fileRef = 2835D3360A9794D1002E018A /* Audio.m */; };
 		2835D33C0A9795B9002E018A /* Actions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2835D33B0A9795B9002E018A /* Actions.m */; };
 		283EDFBA0A8BAE2100065960 /* MU-OpenGLContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 283EDFB90A8BAE2100065960 /* MU-OpenGLContext.m */; };
 		285BF27F0A926BE7003F6BAC /* A2DiskDrive.m in Sources */ = {isa = PBXBuildFile; fileRef = 285BF27C0A926BB2003F6BAC /* A2DiskDrive.m */; };
@@ -79,7 +79,7 @@
 		280F4D390A89017C000B3B80 /* ScreenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenView.m; sourceTree = "<group>"; };
 		28179BED0AB2029E00686944 /* XCode.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = XCode.txt; sourceTree = "<group>"; };
 		2818CD090AA4C9790002F245 /* Notes-to-self.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Notes-to-self.txt"; sourceTree = "<group>"; };
-		2835D3360A9794D1002E018A /* Run.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Run.m; sourceTree = "<group>"; };
+		2835D3360A9794D1002E018A /* Audio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Audio.m; sourceTree = "<group>"; };
 		2835D33B0A9795B9002E018A /* Actions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Actions.m; sourceTree = "<group>"; };
 		283EDFB90A8BAE2100065960 /* MU-OpenGLContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MU-OpenGLContext.m"; sourceTree = "<group>"; };
 		285BF2460A926901003F6BAC /* CPU-Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPU-Macros.h"; sourceTree = "<group>"; };
@@ -136,7 +136,7 @@
 		2A37F4B7FDCFA73011CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		8D15AC370486D014006FF6A4 /* Catakig.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Catakig.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D15AC370486D014006FF6A4 /* Catakig.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catakig.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,7 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				2835D33B0A9795B9002E018A /* Actions.m */,
-				2835D3360A9794D1002E018A /* Run.m */,
+				2835D3360A9794D1002E018A /* Audio.m */,
 				287D19910AB4920B00CCB6E2 /* MyDocument.m */,
 			);
 			path = MyDocument;
@@ -425,7 +425,7 @@
 				285BF27F0A926BE7003F6BAC /* A2DiskDrive.m in Sources */,
 				2878B28D0A93ABBC0084BF5E /* MU-Object.m in Sources */,
 				28736F100A94F6700013975E /* Printing.l in Sources */,
-				2835D3370A9794D1002E018A /* Run.m in Sources */,
+				2835D3370A9794D1002E018A /* Audio.m in Sources */,
 				2835D33C0A9795B9002E018A /* Actions.m in Sources */,
 				2861690D0A9A06A200E398F8 /* MU-UserDefaults.m in Sources */,
 				28D98A8F0AAF4EB20012BCAD /* MyApplication.m in Sources */,
