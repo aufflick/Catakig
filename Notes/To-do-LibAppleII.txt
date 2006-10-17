@@ -1,0 +1,100 @@
+
+==== Non-functioning Apple II Software (that should work) ====
+
+* Rescue Raiders?  Usually launches, but sometimes re-boots mysteriously.
+	(Could just be the disk image I'm using.)
+* Stellar 7?  Seems okay now, but wasn't working earlier.
+* Apple Panic, GraForth.  Something wrong with our keypress buffering?
+
+
+==== CPU ====
+
+* Find quicker Z-flag query expression?  (Rethink ZF flag.)
+* Use rotated opcodes: op<<6 | op>>2 ?
+* Keep A in a local variable?
+* Implement old 6502 ADC & SBC behavior (different flags than 65c02)
+* Video floater bytes not correct yet.
+* On ][ and ][+, RESET should not affect the language card state.
+* Keep 'scanLine' in upper bits of 't', instead of extra variable.
+* Peripheral expansion ROMs not being swapped in correctly.
+
+
+==== Video ====
+
+* Review D/HGR rendering.  Glitches still apparent?
+* Support European screen glyphs.
+* Support European (PAL) color palette.
+* Implement the "bizarre" (and useless) GR video mode?
+* Simulate color burst for text in graphics mode.
+* Implement Videx 80-column card for IIo and IIp models?
+* Eliminate need to scale array index by 4 when using 'vpix' tables?
+
+
+==== Audio ====
+
+* Add Mockingboard emulation.
+* Add sound effects to printer and disk drive activity.
+* Support cassette tape input?  Probably not worth it.
+* There are occasional pops in the audio output.
+
+
+==== Disk Drives & Image Files ====
+
+* Support BZ- and GZ-compressed disk image files.
+* Use track size of 6384-6400 bytes instead of 6656?
+* Infer DO/PO format of 140K disks by examining their contents.
+* On computer Reset, does the IWM mode register revert to 0?
+* Update checksum on modified DiskCopy 4 images.
+* Does IWM mode register change after RESET?
+* Support FDI disk images?  NB2?
+* Forbid Disk II drives accepting 2IMG-PO disks > 140 KB.
+* On real Apple II with IWM, verify IWM status register value under all
+	possible drive contents: none, read-only, read-write.
+* Failure to load a drive should _not_ empty it?
+* Need to regularize NIB tracks when loading?
+
+
+==== Printer ====
+
+* Not processing rubout characters ($7F) yet.
+* The Flex scanner is not re-entrant, and not thread-safe.  Use 're2c'?
+* Output PS should be friendly to A4 paper sizes, and PDF distilling.
+* Use PDF-lib library for printing to PDF?
+* Preferences:
+	LF after CR, yes or no
+	7 or 8 bit data path
+	card DIP switch states
+	page size US Letter or A4
+	line width 40 or 80
+* Epson emulation:
+	Ibsen font bounding boxes needed
+	Tab stops are not always a constant width.
+	Graphics character set; European character sets.
+	Handle rubout and backspace characters properly.
+	Vertical tabs not handled.
+
+
+==== Model-specific Features ====
+
+* The IIc+ doesn't work yet.  Worth bothering with?
+* IIc: provide a 40/80 column switch?
+* IIc: detect various ROM versions, an act appropriately.  In particular,
+	the mouse firmware can be in slot 4 or 7, the number of ROM banks can
+	be either 1 or 2, and expansion RAM might or might not be available.
+* IIc: reading $C048 should reset the X0/Y0 interrupt flags.
+
+
+==== Miscellany ====
+
+* State saving and restoring!
+* The Apple ][ and ][+ are wasting 64KB for aux. RAM that's never used.
+* Add Z80 and CP/M support?
+* Emulate RAMWorks card?  ThunderClock?
+* Use ObjC exceptions instead of error codes?  (Requires MacOS 10.3+)
+	How about using NSError?
+* Use NSFileHandles or NSStreams instead of Unix FDs and FILE pointers?
+* Add Apple II mouse support.
+* Implement the Parallel Interface Card?  It's much simpler than the SSC.
+* Eliminate non-POSIX calls?
+* Have different models inherit from a base class?
+* Save and restore NSUserDefaults for the library.

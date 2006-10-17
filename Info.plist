@@ -9,6 +9,30 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
+				<string>dsk</string>
+				<string>do</string>
+				<string>po</string>
+				<string>nyb</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>FloppyDisk</string>
+			<key>CFBundleTypeName</key>
+			<string>5-inch disk</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>A2D5</string>
+				<string>DSK5</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>None</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>NSPersistentStoreTypeKey</key>
+			<string>Binary</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
 				<string>a2st</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>

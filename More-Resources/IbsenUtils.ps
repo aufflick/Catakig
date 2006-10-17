@@ -31,7 +31,13 @@
 /TurnOn		{     Style or   /Style exch def} def % nFlags --
 /SpcWidth	{(-- ) BlessString stringwidth pop mul} def % nSpaces -- width
 
-/G  {Inch exch idiv exch 0 exch ashow} def % sData nDotsPerHorizInch --
+/G % sData nDotsPerHorizInch --
+{
+  Inch exch idiv exch 0 exch
+% dup 0 127 put  dup 1 128 put
+  ashow
+} def 
+
 /G0 { 60 G} def % sData --
 /G1 {120 G} def % sData --
 /G2 {120 G} def % sData --
@@ -153,7 +159,6 @@
 
 /setdistillerparams where { pop <<
   %/CompatibilityLevel 1.4
-  %/PDFSETTINGS /printer
   %/NeverEmbed [/Courier]
   %/EmbedAllFonts true
   /SubsetFonts true
@@ -167,3 +172,4 @@
 
 /Ibsen findfont /T0Font get  12 Scale mul  scalefont setfont
 Reset
+

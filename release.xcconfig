@@ -1,10 +1,10 @@
 #include "common" // file 'common.xcconfig'
 
+ARCHS	= ppc i386
+
 GCC_OPTIMIZATION_LEVEL			= 3
 GCC_DYNAMIC_NO_PIC				= YES
 GCC_GENERATE_DEBUGGING_SYMBOLS	= NO
-
-ARCHS		= ppc i386
 
 SEPARATE_STRIP						= YES
 DEAD_CODE_STRIPPING					= YES

@@ -5,22 +5,25 @@ App_Version					= 2.00b2
 
 PRODUCT_NAME				= Catakig
 WRAPPER_EXTENSION			= app
-//CURRENT_PROJECT_VERSION	= x.x.x
+
+//ALWAYS_SEARCH_USER_PATHS	= NO
+	// Apple recommends this setting
 
 INFOPLIST_FILE					= Info.plist
-GCC_PREFIX_HEADER				= Source/Prefix.pch
 GCC_PRECOMPILE_PREFIX_HEADER	= YES
+GCC_PREFIX_HEADER				= Source/Prefix.pch
 GCC_PFE_FILE_C_DIALECTS			= c objective-c
+PREBINDING						= NO
 
 GCC_INPUT_FILETYPE				= sourcecode.c.objc
-//GCC_INPUT_FILETYPE			= automatic
-	 // "Compile Sources as"
+	// "Compile Sources as": automatic, sourcecode.c.objc
+
 GCC_C_LANGUAGE_STANDARD			= c99
 GCC_ENABLE_OBJC_EXCEPTIONS		= YES
-GCC_STRICT_ALIASING				= YES
+//GCC_STRICT_ALIASING				= YES
 
 //GCC_VERSION		= 4.0
-GCC_VERSION_ppc		= 4.0 // 3.3
+GCC_VERSION_ppc		= 4.0 // 3.3?
 GCC_VERSION_i386	= 4.0
 
 //SDKROOT		= /Developer/SDKs/MacOSX10.3.9.sdk
@@ -40,8 +43,7 @@ OTHER_LDFLAGS = -lz -lbz2
 
 // ==== Warnings ====
 
-GCC_WARN_UNUSED_VARIABLE					= NO
-GCC_WARN_ABOUT_RETURN_TYPE					= YES
-GCC_WARN_ABOUT_MISSING_PROTOTYPES			= YES
-//GCC_WARN_SIGN_COMPARE						= YES
-
+GCC_WARN_UNUSED_VARIABLE			= NO
+GCC_WARN_ABOUT_RETURN_TYPE			= YES
+GCC_WARN_ABOUT_MISSING_PROTOTYPES	= YES
+//GCC_WARN_SIGN_COMPARE				= YES

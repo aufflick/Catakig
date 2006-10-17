@@ -1,0 +1,48 @@
+
+========== BUILDING CATAKIG IN XCODE 2, FOR MACOS X ==========
+
+The information here should be helpful on those occasions when the XCode
+project needs to be re-constructed -- either because Apple comes out with
+a new, radically different version of their IDE (as they've done twice
+on my watch), or because the project file gets lost or damaged.  This
+information should also be helpful for writing a Unix "Makefile" or
+"autoconf" script, should anyone want to do that at some point.
+  -- CK
+
+
+==== Files in the project ====
+
+For source code, everything in folder "Source".  Just drag and drop the
+whole folder into the project.
+
+For Resources, everything in folder "More-Resources".  Again, just drag and
+drop into the project's "Resources" group.
+
+The '.xcconfig' files are used to set target configuration options, instead of XCode's dialog interface to them.  File 'debug.xcconfig' is for the Debug target, file 'release.xcconfig' is for the Release target, and both incorporate 'common.xcconfig'.
+
+
+==== Linked frameworks ====
+
+*	Cocoa, OpenGL, AudioUnit, CoreAudio
+*	Carbon (needed only for the 'SetSystemUIMode' function)
+
+
+==== NIB notes ====
+
+*	The single AppController object is the delegate for both the main
+	NSApplication and NSMenu objects.
+	
+*	The main application object is actually an instance of 'MyApplication',
+	which subclasses NSApplication.  Subclassing is done so that we
+	can override '-sendEvent'.
+
+*	An Apple II window's ScreenView is also its initial (and permanent)
+	First Responder.  The Apple II object is the next responder after
+	that, then the NSWindow and the usual responder chain.
+
+*	Each Apple II NSDocument is the delegate of its window.
+
+*	Menu command "New" was renamed "New Apple II" -- and, instead of
+	sending -newDocument to First Responder, sends this message to the
+	AppController object.  (This is so we can put up the "New Apple II"
+	panel first.)

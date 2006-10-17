@@ -1,0 +1,93 @@
+/*	Prefix.pch
+
+	A pre-compiled header implicitly included by all source files of
+	this project.
+*/
+
+#ifndef __OBJC__
+	#error This project must be compiled as Objective-C/C++ !
+#endif
+
+//---------------------------------------------------------------------------
+//	Platform-dependent includes.
+
+#if defined(GNUSTEP) // then platform is GNUStep on generic Unix
+
+// (This port is hardly started yet!!)
+
+	#import <Foundation/Foundation.h>
+	#import <AppKit/AppKit.h>
+
+	#import <GL/gl.h>
+	#import <GL/glu.h>
+	#import <GL/glext.h>
+//	#import <GL/glut.h>
+
+#elif defined(__APPLE__) // then platform is Cocoa on MacOS X
+
+	#import <Cocoa/Cocoa.h>
+
+	#import <OpenGL/OpenGL.h>
+	#import <OpenGL/gl.h>
+	#import <OpenGL/glu.h>
+	#import <OpenGL/glext.h>
+//	#import <GLUT/glut.h>
+
+	#import <AudioUnit/AudioUnit.h>
+//	#import <AudioToolbox/AudioToolbox.h>
+	#import <CoreAudio/CoreAudio.h>
+//	#import <CoreAudioKit/CoreAudioKit.h>
+
+//	#import <QuickTime/QuickTime.h>
+//	#import <QTKit/QTKit.h>
+//	#import <QuartzCore/QuartzCore.h>
+
+	#if 0
+		#import <Carbon/Carbon.h>
+	#else
+		#import <ApplicationServices/ApplicationServices.h>
+		#import <CoreServices/CoreServices.h>
+	#endif
+
+#else
+	#error Target platform is neither Cocoa nor GNUStep.  Can't continue.
+
+#endif
+
+//---------------------------------------------------------------------------
+//	Platform-neutral includes.
+
+#import <sys/types.h>
+#import <sys/mman.h>
+#import <sys/stat.h>
+//mport <sys/time.h>
+
+#import <ctype.h>
+//mport <dirent.h>
+#import <errno.h>
+#import <fcntl.h>
+#import <math.h>
+#import <pthread.h>
+#import <regex.h>
+//mport <stdbool.h>
+#import <stddef.h>
+#import <stdint.h>
+#import <stdio.h>
+#import <stdlib.h>
+#import <string.h>
+#import <time.h>
+#import <unistd.h>
+
+//mport <bzlib.h>
+#import <zlib.h>
+
+//---------------------------------------------------------------------------
+//	Miscellany.
+
+#if !defined(__cplusplus)  &&  !defined(and)
+	#define and  &&
+	#define or   ||
+	#define not  !
+#endif
+
+//---------------------------------------------------------------------------
