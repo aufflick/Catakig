@@ -10,15 +10,15 @@
 static struct // the ROM repository
 {
 	uint8_t
-		bogus[0x100],		// These are init'd with 'myROM.h'.
+		bogus[0x100],		// These are init'd with file 'myROM.h'.
 		printer[0x100],
 		clock[0x100],
-		Slinky[0x100],
+		memory[0x100],
 
 		DiskII[0x100],
 		SSCX[0x700], SSC[0x100],
 		IIeSerialX[0x700], IIeSerial[0x100],
-		SlinkyX[0x800],
+		Slinky[0x100], SlinkyX[0x800],
 		Mouse[0x100], // MouseX[0x800],
 	//	PIC[0x100],
 	//	ThunderClock[0x100], ThunderClockX[0x800],
@@ -82,8 +82,8 @@ static struct // the ROM repository
 //---------------------------------------------------------------------------
 
 - (void)_InstallPeripheralROM:(unsigned)slotNum
-	:(const uint8_t*)slotROM // size 256
-	:(const uint8_t*)expansionROM // size 2048
+	:(const uint8_t [/*0x100*/])slotROM
+	:(const uint8_t [/*0x800*/])expansionROM
 {/*
 	Private utility method for importing a peripheral's ROM content,
 	given its slot number and pointers to the bytes.
@@ -92,25 +92,25 @@ static struct // the ROM repository
 		return;
 
 	if (slotROM != nil)
-		memcpy(mMemory->ROM[1] + 0x100*slotNum, slotROM, 0x100);
+		memcpy((mMemory->ROM[1]) + 0x100*slotNum, slotROM, 0x100);
 
 	if (expansionROM != nil)
-		memcpy(mMemory->ROM[1] + 0x800*slotNum, expansionROM, 0x800);
+		memcpy((mMemory->ROM[1]) + 0x800*slotNum, expansionROM, 0x800);
 }
 
 //---------------------------------------------------------------------------
 
 - (void)_PrepareModel
 {/*
-	Makes model-specific preparations for this Apple II, including ROM
+	Makes model-specific preparations for this Apple II, primarily ROM
 	content and flag settings.
 */
 	enum 
 	{
-		kMF_ec =	// set of mutable flags common to IIe and IIc
-					kf80COL | kfSINGRES | kfALTCHAR |
-					kfALTZP | kfRAMRD | kfRAMWRT |
-					kf80STOREm | kf80STOREv
+		kMF_ec = // set of mutable flags common to IIe and IIc
+			kf80COL | kfSINGRES | kfALTCHAR |
+			kfALTZP | kfRAMRD | kfRAMWRT |
+			kf80STOREm | kf80STOREv
 	};
 	uint8_t		*ROM0 = mMemory->ROM[0], // internal, or main bank
 				*ROM1 = mMemory->ROM[1]; // external, or alt. bank
@@ -123,56 +123,61 @@ static struct // the ROM repository
 	mMutableFlags = 0;
 	memset(mMemory->ROM, 0, sizeof(mMemory->ROM)); // wipe ROM clean
 
-	for (int i = 0;  i <= 7;  ++i) // for debugging memory mapping!!
-		memset(ROM1 + 0x800*i, i*0x11, 0x800);
+#if 1
+	for (int s = 1;  s <= 7;  ++s) // for debugging memory mapping!!
+	{
+		memset(ROM1 + 0x100*s, s, 0x100);
+		memset(ROM1 + 0x800*s, s*0x11, 0x800);
+	}
+#endif
 
-//	Install the machine's primary ROM, copied from the repository.
+//	Install the machine's primary ROM, copying it from the repository.
 
 	switch (mModel)
 	{
 	  case kA2ModelIIo:
 		memcpy(ROM0 + 0x1000, gROM.IIo, 0x3000);
-		goto PrepIIo_p_e;
+		goto PrepNonIIc;
 
 	  case kA2ModelIIp:
 		memcpy(ROM0 + 0x1000, gROM.IIpD0, 0x3000);
-		goto PrepIIo_p_e;
+		goto PrepNonIIc;
 
 	  case kA2ModelIIe:
 		memcpy(ROM0 + 0x0100, gROM.IIeC1, 0x3F00);
 		mMutableFlags |= kMF_ec | kfCXROM | kfC3ROM;
-		// fall into PrepIIo_p_e
+		// fall into ...
 
-	  PrepIIo_p_e:
-		[self _InstallPeripheralROM:1 :gROM.SSC :gROM.SSCX];
-		[self _InstallPeripheralROM:2 :gROM.clock :nil];
-		[self _InstallPeripheralROM:4 :gROM.Slinky :gROM.SlinkyX];
+	  PrepNonIIc:
+		[self _InstallPeripheralROM:1 :gROM.printer :nil];
+		[self _InstallPeripheralROM:3 :gROM.clock :nil];
+		[self _InstallPeripheralROM:4 :gROM.memory :nil];
 		[self _InstallPeripheralROM:6 :gROM.DiskII :nil];
-		memcpy(mMemory->altSlotROM, ROM1, 0x800);
-		memcpy(mMemory->altSlotROM+0x300, ROM0+0x300, 0x100);
+
+		memcpy(mMemory->mixedSlotROM, ROM1, 0x800);
+		memcpy(mMemory->mixedSlotROM+0x300, ROM0+0x300, 0x100);
 		memcpy(mPrinter.reg,
-			"\x68\xEE\x7B\xFF\x68\xEE\x7B\xFF"
+			"\x68\xEE\x7B\xFF"
+			"\x68\xEE\x7B\xFF"
 			"\0\x10\0\0\xFF\xFF\xFF\xFF", 16);
 		break;
 
-
 	  case kA2ModelIIcp:
-		memcpy(ROM0 + 0x0100, gROM.IIcpMain, 0x3F00);
-		memcpy(ROM1 + 0x0100, gROM.IIcpAlt , 0x3F00);
+		memcpy(ROM0 + 0x100, gROM.IIcpMain, 0x3F00);
+		memcpy(ROM1 + 0x100, gROM.IIcpAlt , 0x3F00);
 		goto PrepIIc;
 
 	  case kA2ModelIIc:
 		// Check for older, single-bank IIc ROM!!
-		memcpy(ROM0 + 0x0100, gROM.IIcMain, 0x3F00);
-		memcpy(ROM1 + 0x0100, gROM.IIcAlt , 0x3F00);
-		// fall into PrepIIc;
+		memcpy(ROM0 + 0x100, gROM.IIcMain, 0x3F00);
+		memcpy(ROM1 + 0x100, gROM.IIcAlt , 0x3F00);
+		// fall into ...
 
 	  PrepIIc:
 		mMutableFlags |= kMF_ec;
 		memcpy(mPrinter.reg,
 			"\0\x50\0\0\0\x50\0\0\0\x50\0\0\0\x50\0\0", 16);
-	//	memcpy(mModem.reg,
-	//		"\0\x10\0\0\0\x10\0\0\0\x10\0\0\0\x10\0\0", 16);
+	//	memcpy(mModem.reg, "\0\x10\0\0\0\x10\0\0\0\x10\0\0\0\x10\0\0", 16);
 		break;
 	}
 }
@@ -183,61 +188,61 @@ static struct // the ROM repository
 {/*
 	Scans the given file, looking for ROM segments that we recognize.  A
 	segment is recognized if the checksum of its first 256 bytes matches
-	one that we've precomputed.  Segments are then read into the ROM
-	repository, defined above.
+	a sum that we've precomputed.  Recognized segments are read into the
+	ROM repository structure (above).
 */
-#define CASE(N, ARR)  case 0x##N: \
-	dest = gROM.ARR;  len = sizeof(gROM.ARR);  break;
+#define CASE(N, ARR) \
+	case 0x##N:  dest = gROM.ARR;  len = sizeof(gROM.ARR);  break;
 
-	enum {			kDebug = NO,
-					chunkSize = 256 };
-	uint8_t			chunk[chunkSize];
-	NSInputStream*	sin;
+	enum {		kLogging = NO,
+				chunkSize = 256 };
+	uint8_t		chunk[chunkSize];
+	FILE*		fin;
+	uint32_t	crcInit = crc32(0L, Z_NULL, 0);
 
-	if (nil == (sin = [[NSInputStream alloc] initWithFileAtPath:filePath]))
+	fin = fopen([filePath fileSystemRepresentation], "rb");
+	if (fin == NULL)
 		return NO;
-	[sin open];
+	setbuf(fin, NULL);
 
-	if (kDebug)
-		NSLog(@"Scanning ROM file '%@'", [filePath lastPathComponent]);
+	if (kLogging)
+		NSLog(@"Scanning file '%@' for ROM", [filePath lastPathComponent]);
 
-	while ([sin read:chunk maxLength:chunkSize] == chunkSize)
+	while (fread(chunk, 1, chunkSize, fin) == chunkSize)
 	{
-		uint32_t	crc = adler32(~0UL, chunk, chunkSize);
+		uint32_t	crc = crc32(crcInit, chunk, chunkSize);
 		uint8_t*	dest;
 		long		len;
 
-		if (kDebug)
-			NSLog(@"%05lX: crc=%08X",
-				[[sin propertyForKey:NSStreamFileCurrentOffsetKey] longValue]
-					- chunkSize, crc);
+		if (kLogging)
+			NSLog(@"%05lX: crc=%08X", ftell(fin) - chunkSize, crc);
 
 		switch (crc)
 		{
-			CASE(5FCB5D2A, IIo)
-			CASE(B2ADA4E6, IIpD0)			CASE(F3048537, IIpD5)
-			CASE(EDA770F0, IIeC1)			CASE(085488C1, IIeD5)
+			CASE(AA2342E8, IIo)
+			CASE(B9E3B093, IIpD0)			CASE(79135697, IIpD5)
+			CASE(40375280, IIeC1)			CASE(1DB83E23, IIeD5)
+			CASE(24F39DF7, IIcpMain)		CASE(F768C5C3, IIcpAlt)
 
-			CASE(A3BB7671, IIcMain)			CASE(A9A56CEC, IIcAlt)
-			CASE(A40E7672, IIcpMain)		CASE(A99F6CE9, IIcpAlt)
+			case 0x816CDA70:  CASE(228C4909, IIcMain)
+			case 0xFA9D7930:  CASE(DC459600, IIcAlt)
 
-			CASE(9C377B54, DiskII)
-		//	CASE(39797894, Mouse)
-		//	CASE(67D46AFF, SSC)				CASE(B2EB6D44, SSCX)
-		//	CASE(C37D631F, IIeSerial)		CASE(CDFB877A, IIeSerialX)
-		//	CASE(FCE2762B, Slinky)			CASE(807A73D1, SlinkyX)
+			CASE(CE7144F6, DiskII)
+			CASE(BA81A559, Mouse)
+			CASE(92600557, Slinky)			CASE(67C88BD0, SlinkyX)
+			CASE(87DF71C4, SSC)				CASE(F085C5CF, SSCX)
+			CASE(926CBF62, IIeSerial)		CASE(F35CD658, IIeSerialX)
 
 			default: continue; // chunk not recognized; continue reading
 		}
 		memcpy(dest, chunk, chunkSize);
-		[sin read:dest+chunkSize maxLength:len-chunkSize];
+		fread(dest+chunkSize, 1, len-chunkSize, fin);
 
 		if (dest == gROM.IIpD0)
 			memcpy(gROM.IIeD0, dest, len);
 	}
 
-	[sin close]; // need??
-	[sin release];
+	fclose(fin);
 	return YES;
 
 #undef CASE
@@ -247,16 +252,15 @@ static struct // the ROM repository
 
 + (void)ScanDirectoryForROM:(NSString*)dirPath
 {/*
-	Scans every file in the given directory for recognized segments of
-	ROM.  If nil is passed, the default directory is "ROMs", at the same
-	level as the application bundle.
+	Scans every file in the given directory for recognized segments of ROM.
+	If nil is passed, the application's "ROMs" directory is searched.
 */
+	NSEnumerator	*e;
+	NSString		*fname, *fpath;
+
 	if (dirPath == nil)
 		dirPath = [[[NSBundle mainBundle] bundlePath]
 			stringByAppendingPathComponent:@"../ROMs"];
-
-	NSEnumerator	*e;
-	NSString		*fname, *fpath;
 
 	e = [[[NSFileManager defaultManager]
 		directoryContentsAtPath:dirPath] objectEnumerator];

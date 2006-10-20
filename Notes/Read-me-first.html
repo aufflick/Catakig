@@ -6,7 +6,7 @@ body { margin: 1em;  background-color: white; }
 </style> </head> <body>
 
 <p>
-For anyone browsing Catakig's source code, hoping to make some sense of it, here's a brief summary . . .
+For anyone reading Catakig's source code, hoping to make some sense of it, here's a brief summary . . .
 
 <h3>FILE (DIS-)ORGANIZATION</h3>
 
@@ -20,7 +20,10 @@ The source code is grouped into three major parts:
 </ol>
 
 <p>
-Part 1 depends on parts 2 & 3.  Part 2 depends on part 3.  Part 1 is allowed to have Cocoa-specific code, whereas the other two are meant to be portable, and should rely only on <i>FoundationKit</i>, <i>AppKit</i>, and standard Unix APIs.
+Part 1 depends on parts 2 & 3.  Part 2 depends on part 3.  Part 1 is allowed
+to have Cocoa-specific code, whereas the other two are meant to be portable,
+and should rely only on <i>FoundationKit</i>, <i>AppKit</i>, standard
+Unix APIs, and other common toolkits.
 <p>
 File <b>Prefix.pch</b> is the project's pre-compiled header file.  Its content is
 implicitly included by every source file.
@@ -34,7 +37,7 @@ Documentation of the source code is pretty scant right now.  Most methods do hav
 <p>
 Adhere as much as possible to POSIX, OpenGL, and the common subset of Cocoa and GNUStep.  Maybe port someday to generic Linux/BSD + GNUStep platforms.  OpenAL might be a another good standard, for audio output.
 <p>
-Target MacOS X 10.3, and avoid 10.4+ features.  (Occasionally review this decision though.)  It would be nice to support 10.2 as well, as I was trying to do initially, but it seems time to move on.  Note that MacOS X on Intel must always at least version 10.4.
+For MacOS X platforms, target 10.3 and avoid 10.4+ features.  (Occasionally review this decision though.)  It would be nice to support 10.2 as well, as I was trying to do initially, but it seems time to move on.  Note that MacOS X on Intel is always at least 10.4.
 <p>
 For now, don't bother supporting arbitrary Apple II peripherals in arbitrary slot configurations.  Rather, aim for a "canonical" Apple II with the same feature set across all models.  These features are:
 
@@ -52,37 +55,37 @@ slot #2, but this can be used to talk to the Mockingboard D.  Supporting modems 
 <h3>NAMING CONVENTIONS IN THE SOURCE</h3>
 
 <p>
-In general, identifiers are in mixed-case form (e.g. "doItNow") -- except C pre-processor macros, which follow the ancient C tradition of being all uppercase, with words separated by underscores ("DO_IT_NOW").
+In general, identifiers are in mixed-case form (e.g. "doItNow") -- except C pre-processor macros, which follow the ancient C tradition of being all uppercase with words separated by underscores ("DO_IT_NOW").
 <p>
 All LibAppleII identifiers in the publicly visible scope, except enum constants, begin with "A2".
 <p>
-Enumeration constants begin with "kf" when they're flags (integers having a single 1 bit, e.g. 0x400), "ks" when bit-shift values (0 to 31), "km" when bit-masks (e.g. 0x3FF), and just "k" otherwise.  Public enumeration constants also have "A2" in their prefix.  Flag and shift enum values are often defined in pairs: e.g. "kfALTZP" and "ksALTZP".
+Enumeration constants begin with "kf" when they're flags (integers having a single 1 bit, e.g. 0x400), "ks" when bit-shift values (0 to 31), "km" when bit-masks (e.g. 0x3FF), and just "k" otherwise.  Public enumeration constants in LibAppleII also have "A2" in their prefix.  Flag and shift values often come in associated pairs: e.g. "kfALTZP" and "ksALTZP".
 <p>
-Names of object instance variables begin with "m" and are mixed-case ("mFavoriteColor").  This convention seems to go against popular Objective-C practice, but I don't care.  It helps me.
+Names of object instance variables begin with "m" and are mixed-case (e.g. "mFavoriteColor").  This seems to go against popular Objective-C practice, but I don't care.  It helps me.
 <p>
 Methods supplied by the author that don't exist in the standard class
 libraries have capitalized names.  For example: "InputChar" and not
 "inputChar" -- but on the other hand "keyDown" and not "KeyDown".  In other
-words, lower-cased methods will have some pre-defined purpose in the system
-libraries, because of class inheritance, whereas the upper-cased methods are entirely
+words, lower-cased methods will have some pre-defined purpose through class
+inheritance, whereas the upper-cased methods are
 new additions.  Again, this is a personal convention that helps me.
 <p>
 Methods begining with an underscore ( _ ) are considered private to the class,
-for internal use only.  Objective-C has no "private" attribute like C++ does
+and for internal use only.  Objective-C has no "private" attribute like C++ does
 to enforce this behavior however.  Any Objective-C message can be sent to
 any object at any time.  But the underscore alerts the reader that the method
-isn't supposed to be called from just anywhere.
+isn't supposed to be called by just anybody.
 
 <h3>CODING HABITS OF THE AUTHOR THAT WILL ANNOY YOU</h3>
 
 <p>
-Hard tabs are used in the source, and are expected to be 4 spaces wide.
+Hard tabs are used throughout the source, and are expected to be 4 spaces wide.
 Might switch to soft tabs (all spaces) at some point.
 <p>
 The author often exploits the fact that C literal strings are arrays
 of constant characters, that C characters can also serve as small
 integers, and that therefore short literal strings make handy little
-in-line lookup tables of small integers.  For example:
+in-line lookup tables of small integers.  Here's an example:
 
 <pre>
   number_of_one_bits = "\0\1\1\2\1\2\2\3"[n]
@@ -101,7 +104,7 @@ for-loop variables in-line; (2) initializing structure fields by name
 instead of by position.  The first one is pretty well known, but use of the second feature doesn't seem very widespread and might be a surprise to some.
 <p>
 The author prefers using "and", "or", and "not" over "&&", "||" and "!".
-Macros defining these pseudo-keywords are in the header <b>Prefix.pch</b>.
+Macros defining these pseudo-keywords are in <b>Prefix.pch</b>.
 
 <p align=right><i>
 Colin K.<br>Oct. 2006

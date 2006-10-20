@@ -189,10 +189,7 @@ static void EnnybSector(uint8_t* dest, //[kSizePhysSector]
 	for (int t = 35;  --t >= 0;)
 	{
 		read(mOrigFD, buf[0], rdTrackSize);
-#if 0
-		memcpy(buf[1], buf[0], wrTrackSize);
-		
-#endif
+
 		write(mWorkFD, buf[0], wrTrackSize);
 	}
 }

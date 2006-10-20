@@ -1,4 +1,8 @@
 /*	Globals.l (.m)
+
+	Generally useful functions and data structures residing in the global
+	scope.  Everything except 'A2G' however is considered private to the
+	LibAppleII library.
 */
 %option 8bit never-interactive noyywrap prefix="A2Globals_"
 %{
@@ -39,7 +43,7 @@ BZh						return kFmtBZip;
 struct A2Globals  A2G =
 {
 	.defaultModel		= kA2ModelIIp,
-	.defaultExtraRAM	= 0, // sensible values: 0, 18-21
+	.defaultExtraRAM	= 0, // sensible values: 0, 20 (1 MB)
 
 	.standardColors = // ... in a 12-bit RGB format
 	{
@@ -199,7 +203,7 @@ BOOL A2AppendResourceFile(fd_t fout, NSString* resName)
 
 void A2DumpArray(const char* name, const void* arr, size_t sz, int type)
 {/*
-	Dumps an array of integers to a text file, in the format of C static
+	Dumps an array of integers to a text file, in the form of C static
 	initializers.
 */
 	static FILE*	fout = NULL;

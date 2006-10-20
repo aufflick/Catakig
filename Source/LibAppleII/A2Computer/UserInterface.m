@@ -150,7 +150,6 @@ static NSString* gNameOfModel[] =
 	mPC = mMemory->ROM[0][0x3FFD] << 8 // load PC from $FFFC-D in ROM
 		| mMemory->ROM[0][0x3FFC];
 
-//	mPrinter.reg[0x8] = ??;
 	mPrinter.reg[0xA] = 0; // command reg
 	mPrinter.reg[0xB] = 0x3E; // control reg
 	mPrinter.lights = 0;
@@ -258,7 +257,10 @@ static inline uint8_t ASCIIfy(int charset, uint8_t ch)
 //---------------------------------------------------------------------------
 
 + (void)_UpdateClock:(NSTimer*)timer
-{
+{/*
+	Called approximately once per second, from an NSTimer, to update the
+	date and time.  Apple II clock cards read the data computed here.
+*/
 	static struct
 	{
 		char	hi[100], lo[100];
@@ -267,6 +269,7 @@ static inline uint8_t ASCIIfy(int charset, uint8_t ch)
 	{
 		"00000000001111111111222222222233333333334444444444"
 		"55555555556666666666777777777788888888889999999999",
+
 		"01234567890123456789012345678901234567890123456789"
 		"01234567890123456789012345678901234567890123456789"
 	};
@@ -282,14 +285,16 @@ static inline uint8_t ASCIIfy(int charset, uint8_t ch)
 
 	tPrev = t;
 	A2G.timeInGMT? gmtime_r(&t, &tm) : localtime_r(&t, &tm);
-	tm.tm_year %= 100;
 	tm.tm_mon += 1;
+	if (tm.tm_year >= 100)
+		tm.tm_year -= 100;
 
 	uint8_t str[32] =
 	{
 		tm.tm_mon << 5 | tm.tm_mday,
 		tm.tm_year << 1 | tm.tm_mon >> 3,
-		tm.tm_min, tm.tm_hour,
+		tm.tm_min,
+		tm.tm_hour,
 
 		digit.hi[tm.tm_mon ], digit.lo[tm.tm_mon ], ',',
 		'0', digit.lo[tm.tm_wday], ',',
@@ -299,8 +304,7 @@ static inline uint8_t ASCIIfy(int charset, uint8_t ch)
 		digit.hi[tm.tm_sec ], digit.lo[tm.tm_sec ], 13,
 	};
 
-	for (int i = 32/4;  --i >= 0;)
-		((uint32_t*)(A2T.curTime))[i] = ((uint32_t*)str)[i];
+	QCOPY(A2T.curTime, str, 32);
 }
 
 //---------------------------------------------------------------------------

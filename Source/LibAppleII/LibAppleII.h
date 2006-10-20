@@ -153,7 +153,7 @@ extern struct A2Globals
 
 	struct {			// optional "Slinky" RAM card
 		uint32_t		pos, mask;
-		uint8_t			*base, nowhere;
+		uint8_t			*rBase, *wBase, rNowhere, wNowhere;
 	}					mSlinky;
 
 	struct A2IWM {		// two IWM controllers, with two drives each

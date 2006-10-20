@@ -1,13 +1,13 @@
 // 'common.xcconfig' -- a set of common XCode configration settings
 // shared by all targets.
 
-App_Version					= 2.00b2
+App_Version					= 2.00b3
 
 PRODUCT_NAME				= Catakig
 WRAPPER_EXTENSION			= app
 
 //ALWAYS_SEARCH_USER_PATHS	= NO
-	// Apple recommends this setting
+	// Apple recommends this setting, but we can't use it yet.
 
 INFOPLIST_FILE					= Info.plist
 GCC_PRECOMPILE_PREFIX_HEADER	= YES

@@ -2,7 +2,8 @@
 /Scale 30 def
 /Inch 72 Scale mul def
 /PageHeight Inch 11 mul def
-%/CR-does-LF false def
+/CR-implies-LF false def
+/ToFontCode 16#300 string def
 
 /kfItalics		16#001 def
 /kfUnderline	16#002 def
@@ -14,7 +15,6 @@
 /kfDblStrike	16#080 def
 /kfSubscript	16#100 def
 /kfSuperscript	16#200 def
-/ToFontCode		16#300 string def
 
 0 1 16#2FF {
 	ToFontCode exch dup

@@ -1,7 +1,7 @@
 /*	Catakig-Cocoa.h
 
-	Primary header for source files of the MacOS X application.
-	Not used by lower-level libraries.
+	Primary header for source files of the MacOS X application.  Not used
+	by lower-level libraries.
 */
 #import "MyUtils.h"
 #import "LibAppleII.h"

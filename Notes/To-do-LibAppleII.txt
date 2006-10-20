@@ -12,7 +12,6 @@
 * Find quicker Z-flag query expression?  (Rethink ZF flag.)
 * Use rotated opcodes: op<<6 | op>>2 ?
 * Keep A in a local variable?
-* Implement old 6502 ADC & SBC behavior (different flags than 65c02)
 * Video floater bytes not correct yet.
 * On ][ and ][+, RESET should not affect the language card state.
 * Keep 'scanLine' in upper bits of 't', instead of extra variable.
@@ -27,15 +26,14 @@
 * Implement the "bizarre" (and useless) GR video mode?
 * Simulate color burst for text in graphics mode.
 * Implement Videx 80-column card for IIo and IIp models?
-* Eliminate need to scale array index by 4 when using 'vpix' tables?
 
 
 ==== Audio ====
 
+* There are glitches in the audio output.
 * Add Mockingboard emulation.
 * Add sound effects to printer and disk drive activity.
 * Support cassette tape input?  Probably not worth it.
-* There are occasional pops in the audio output.
 
 
 ==== Disk Drives & Image Files ====
@@ -52,6 +50,8 @@
 	possible drive contents: none, read-only, read-write.
 * Failure to load a drive should _not_ empty it?
 * Need to regularize NIB tracks when loading?
+* Reduce number of temporary files needed.  Use just one for both floppy
+	drives and the printer session.
 
 
 ==== Printer ====

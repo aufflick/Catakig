@@ -321,9 +321,7 @@ CASE(BF):
 	CASE(C0):	d = mSlinky.pos;  DONE;
 	CASE(C1):	d = mSlinky.pos >> 8;  DONE;
 	CASE(C2):	d = mSlinky.pos >> 16 | 0xF0;  DONE;
-	CASE(C3):	d = mSlinky.base[mSlinky.pos++ & mSlinky.mask];  DONE;
-
-	CASE(CE):	d = (mSlinky.mask + 1) >> 9;  DONE;
+	CASE(C3):	d = mSlinky.rBase[mSlinky.pos++ & mSlinky.mask];  DONE;
 	CASE(CF):	d = (mSlinky.mask + 1) >> (9+8);  DONE;
 
 #else // write phase
@@ -331,16 +329,14 @@ CASE(BF):
 	CASE(C0):	mSlinky.pos = mSlinky.pos & 0xFFFF00 | d;  DONE;
 	CASE(C1):	mSlinky.pos = mSlinky.pos & 0xFF00FF | d<< 8;  DONE;
 	CASE(C2):	mSlinky.pos = mSlinky.pos & 0x00FFFF | d<<16;  DONE;
-	CASE(C3):	mSlinky.base[mSlinky.pos++ & mSlinky.mask] = d;  DONE;
-
-	CASE(CE):
+	CASE(C3):	mSlinky.wBase[mSlinky.pos++ & mSlinky.mask] = d;  DONE;
 	CASE(CF):	// fall thru
 
 #endif
 
 	CASE(C4): CASE(C5): CASE(C6): CASE(C7):
 	CASE(C8): CASE(C9): CASE(CA): CASE(CB):
-	CASE(CC): CASE(CD):
+	CASE(CC): CASE(CD): CASE(CE):
 		DONE_F;
 
 //-------------------------------------------------- $C0D0-EF (IWMs)
@@ -391,8 +387,8 @@ CASE(BF):
 
 //	Arrive at R_Remap or W_Remap with 'd' equal to the new value for
 //	'mFlags'.  Arrive at R_Flag with 'd' equal to one of the 'ks'
-//	flag constants.  Arrive at R_Floater7 with 'd' having a significant
-//	bit 7.
+//	flag constants.  Arrive at R_Floater7 with 'd' having a value to
+//	return in bit 7.
 
 #if READ_PHASE
 

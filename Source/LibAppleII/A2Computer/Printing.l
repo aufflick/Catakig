@@ -1,6 +1,6 @@
 /*	class A2Computer (category Printing)
 */
-%option 7bit never-interactive noyywrap prefix="A2Printing_"
+%option 7bit never-interactive batch noyywrap prefix="A2Printing_"
 %x EpsonRX
 
 %{ --------------------------------------------------------------------------
@@ -24,7 +24,7 @@ static void EpsonText(BOOL trailingRubouts)
 
 		if (ch == '('  or  ch == ')'  or  ch == '\\')
 			fputc('\\', yyout);
-		fputc(ch, yyout);
+		putc(ch, yyout);
 	}
 	fputs(") T", yyout);
 }
@@ -102,19 +102,19 @@ ANY3		{ANY}{3}
 		fprintf(yyout, "  %d C-%c", yyleng, yytext[0] | '@');
 	}
 
-	[\x20-\x7E]+\x18+	;
-	[\x20-\x7E]+\x7F+	EpsonText(YES);
-	[\x20-\x7E]+		EpsonText(NO);
+	[\x20-\x7E]+\x18+		; // cancel buffer
+	[\x20-\x7E]+\x7F+		EpsonText(YES);
+	[\x20-\x7E]+			EpsonText(NO);
 
 	{ESC}[*]{ANY3} |
 	{ESC}[ef]{ANY2} |
 	{ESC}[-SRUWms]{ANY} |
-	{ESC}{ANY}			; // invalid sequences, skipped
+	{ESC}{ANY}				; // invalid sequences, skipped
 }
 
 <INITIAL>{
-	[\r\n\t\v\f]+ |
-	[\x20-\x7E]+		ECHO;
+	[\n\t\v\f]+ |
+	[\x20-\x7E]+			ECHO;
 }
 
 <*>{

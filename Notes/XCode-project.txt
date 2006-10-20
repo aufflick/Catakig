@@ -18,7 +18,10 @@ whole folder into the project.
 For Resources, everything in folder "More-Resources".  Again, just drag and
 drop into the project's "Resources" group.
 
-The '.xcconfig' files are used to set target configuration options, instead of XCode's dialog interface to them.  File 'debug.xcconfig' is for the Debug target, file 'release.xcconfig' is for the Release target, and both incorporate 'common.xcconfig'.
+The '.xcconfig' files are used to set target configuration options, instead
+of XCode's dialog interface to them.  File 'debug.xcconfig' is for the Debug
+target, file 'release.xcconfig' is for the Release target, and both
+incorporate 'common.xcconfig'.
 
 
 ==== Linked frameworks ====

@@ -18,9 +18,6 @@
 		283EDFBA0A8BAE2100065960 /* MU-OpenGLContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 283EDFB90A8BAE2100065960 /* MU-OpenGLContext.m */; };
 		285BF27F0A926BE7003F6BAC /* A2DiskDrive.m in Sources */ = {isa = PBXBuildFile; fileRef = 285BF27C0A926BB2003F6BAC /* A2DiskDrive.m */; };
 		2861690D0A9A06A200E398F8 /* MU-UserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 2861690C0A9A06A200E398F8 /* MU-UserDefaults.m */; };
-		287233460A878017006AA610 /* common.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 287233450A878017006AA610 /* common.xcconfig */; };
-		2872334C0A87802F006AA610 /* debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2872334B0A87802F006AA610 /* debug.xcconfig */; };
-		287233500A878041006AA610 /* release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2872334F0A878041006AA610 /* release.xcconfig */; };
 		2872364D0A87AF06006AA610 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 287236480A87AF06006AA610 /* AudioUnit.framework */; };
 		2872364E0A87AF06006AA610 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 287236490A87AF06006AA610 /* CoreAudio.framework */; };
 		287236500A87AF06006AA610 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2872364B0A87AF06006AA610 /* OpenGL.framework */; };
@@ -77,17 +74,21 @@
 		280F4D370A89017C000B3B80 /* PrefsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefsPanel.m; sourceTree = "<group>"; };
 		280F4D380A89017C000B3B80 /* ScreenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenView.h; sourceTree = "<group>"; };
 		280F4D390A89017C000B3B80 /* ScreenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenView.m; sourceTree = "<group>"; };
-		28179BED0AB2029E00686944 /* XCode.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = XCode.txt; sourceTree = "<group>"; };
-		2818CD090AA4C9790002F245 /* Notes-to-self.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Notes-to-self.txt"; sourceTree = "<group>"; };
+		281E621B0AE58D7E00C222E9 /* _Notes-to-self.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "_Notes-to-self.txt"; sourceTree = "<group>"; };
+		281E621C0AE58D7E00C222E9 /* Read-me-first.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "Read-me-first.html"; sourceTree = "<group>"; };
+		281E621D0AE58D7E00C222E9 /* To-do-Cocoa.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "To-do-Cocoa.txt"; sourceTree = "<group>"; };
+		281E621E0AE58D7E00C222E9 /* To-do-LibAppleII.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "To-do-LibAppleII.txt"; sourceTree = "<group>"; };
+		281E621F0AE58D7E00C222E9 /* XCode-project.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "XCode-project.txt"; sourceTree = "<group>"; };
 		2835D3360A9794D1002E018A /* Audio.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Audio.m; sourceTree = "<group>"; };
 		2835D33B0A9795B9002E018A /* Actions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Actions.m; sourceTree = "<group>"; };
 		283EDFB90A8BAE2100065960 /* MU-OpenGLContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MU-OpenGLContext.m"; sourceTree = "<group>"; };
 		285BF2460A926901003F6BAC /* CPU-Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPU-Macros.h"; sourceTree = "<group>"; };
 		285BF27C0A926BB2003F6BAC /* A2DiskDrive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = A2DiskDrive.m; sourceTree = "<group>"; };
 		2861690C0A9A06A200E398F8 /* MU-UserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MU-UserDefaults.m"; sourceTree = "<group>"; };
-		287233450A878017006AA610 /* common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = common.xcconfig; sourceTree = "<group>"; };
-		2872334B0A87802F006AA610 /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
-		2872334F0A878041006AA610 /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
+		286BC21D0AE7C88C0061357D /* Version-History.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Version-History.txt"; sourceTree = "<group>"; };
+		286BC2C40AE685EE00A01672 /* release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
+		286BC2C50AE685EE00A01672 /* debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
+		286BC2C60AE685EE00A01672 /* common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = common.xcconfig; sourceTree = "<group>"; };
 		287233810A87859D006AA610 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		287236470A87AF06006AA610 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /System/Library/Frameworks/AudioToolbox.framework; sourceTree = "<absolute>"; };
 		287236480A87AF06006AA610 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = /System/Library/Frameworks/AudioUnit.framework; sourceTree = "<absolute>"; };
@@ -105,8 +106,6 @@
 		28736F0F0A94F6700013975E /* Printing.l */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.lex; path = Printing.l; sourceTree = "<group>"; };
 		2878B28C0A93ABBC0084BF5E /* MU-Object.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MU-Object.m"; sourceTree = "<group>"; };
 		287D19910AB4920B00CCB6E2 /* MyDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyDocument.m; sourceTree = "<group>"; };
-		288B38700A9604DF00D20934 /* To-do-Cocoa.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "To-do-Cocoa.txt"; sourceTree = "<group>"; };
-		288B38710A9604DF00D20934 /* To-do-LibAppleII.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "To-do-LibAppleII.txt"; sourceTree = "<group>"; };
 		288D488E0A8CEB6400327F4A /* ROM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROM.m; sourceTree = "<group>"; };
 		289663F10A90111700A49F71 /* AboutBoxPanel1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AboutBoxPanel1.png; sourceTree = "<group>"; };
 		289663F20A90111700A49F71 /* Application.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Application.icns; sourceTree = "<group>"; };
@@ -196,6 +195,19 @@
 			path = Cocoa;
 			sourceTree = "<group>";
 		};
+		281E621A0AE58D7E00C222E9 /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				286BC21D0AE7C88C0061357D /* Version-History.txt */,
+				281E621B0AE58D7E00C222E9 /* _Notes-to-self.txt */,
+				281E621C0AE58D7E00C222E9 /* Read-me-first.html */,
+				281E621D0AE58D7E00C222E9 /* To-do-Cocoa.txt */,
+				281E621E0AE58D7E00C222E9 /* To-do-LibAppleII.txt */,
+				281E621F0AE58D7E00C222E9 /* XCode-project.txt */,
+			);
+			path = Notes;
+			sourceTree = "<group>";
+		};
 		2835D3350A9794D1002E018A /* MyDocument */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,10 +221,13 @@
 		287231B70A877A8E006AA610 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				286BC2C40AE685EE00A01672 /* release.xcconfig */,
+				286BC2C50AE685EE00A01672 /* debug.xcconfig */,
+				286BC2C60AE685EE00A01672 /* common.xcconfig */,
+				287233810A87859D006AA610 /* Prefix.pch */,
 				280F4D2D0A89017C000B3B80 /* Cocoa */,
 				2872382C0A87B16B006AA610 /* LibAppleII */,
 				28F52FE20A87D7DF00BE8D0C /* Misc */,
-				287233810A87859D006AA610 /* Prefix.pch */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -246,17 +261,6 @@
 				287238820A87B53B006AA610 /* Video.m */,
 			);
 			path = A2Computer;
-			sourceTree = "<group>";
-		};
-		288B386F0A9604DF00D20934 /* Notes */ = {
-			isa = PBXGroup;
-			children = (
-				2818CD090AA4C9790002F245 /* Notes-to-self.txt */,
-				288B38700A9604DF00D20934 /* To-do-Cocoa.txt */,
-				288B38710A9604DF00D20934 /* To-do-LibAppleII.txt */,
-				28179BED0AB2029E00686944 /* XCode.txt */,
-			);
-			path = Notes;
 			sourceTree = "<group>";
 		};
 		289663F00A90111700A49F71 /* More-Resources */ = {
@@ -300,10 +304,7 @@
 		2A37F4AAFDCFA73011CA2CEA /* Catakig */ = {
 			isa = PBXGroup;
 			children = (
-				288B386F0A9604DF00D20934 /* Notes */,
-				287233450A878017006AA610 /* common.xcconfig */,
-				2872334B0A87802F006AA610 /* debug.xcconfig */,
-				2872334F0A878041006AA610 /* release.xcconfig */,
+				281E621A0AE58D7E00C222E9 /* Notes */,
 				287231B70A877A8E006AA610 /* Source */,
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
@@ -379,9 +380,6 @@
 				8D15AC2D0486D014006FF6A4 /* MainMenu.nib in Resources */,
 				8D15AC2E0486D014006FF6A4 /* MyDocument.nib in Resources */,
 				8D15AC2F0486D014006FF6A4 /* InfoPlist.strings in Resources */,
-				287233460A878017006AA610 /* common.xcconfig in Resources */,
-				2872334C0A87802F006AA610 /* debug.xcconfig in Resources */,
-				287233500A878041006AA610 /* release.xcconfig in Resources */,
 				289663F90A90111700A49F71 /* AboutBoxPanel1.png in Resources */,
 				289663FA0A90111700A49F71 /* Application.icns in Resources */,
 				289663FB0A90111700A49F71 /* DDriveLights.icns in Resources */,
@@ -466,14 +464,14 @@
 /* Begin XCBuildConfiguration section */
 		C05733C808A9546B00998B17 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2872334B0A87802F006AA610 /* debug.xcconfig */;
+			baseConfigurationReference = 286BC2C50AE685EE00A01672 /* debug.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		C05733C908A9546B00998B17 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2872334F0A878041006AA610 /* release.xcconfig */;
+			baseConfigurationReference = 286BC2C40AE685EE00A01672 /* release.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;

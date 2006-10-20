@@ -12,12 +12,12 @@
 
 	IBOutlet NSView*			mSaveImageView;
 	IBOutlet NSControl*			mSaveImageTypes;
-	IBOutlet NSControl*			mSaveImageAddSuffix;
+	IBOutlet NSButton*			mSaveImageAddSuffix;
 
 	IBOutlet NSView*			mPrSessionView;
 	IBOutlet NSControl*			mPrSessionFilter;
 	IBOutlet NSTextField*		mPrSessionSize;
-	IBOutlet NSControl*			mPrSessionAddSuffix;
+	IBOutlet NSButton*			mPrSessionAddSuffix;
 
 	int		mRunState; // low 2 bits: speed;  higher bits: pause level
 	int		mFileFilter;

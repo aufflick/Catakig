@@ -100,7 +100,7 @@
 	NSString*	extensions[/*NSBitmapImageFileType*/] =
 					{ @"tiff", @"bmp", @"gif", @"jpeg", @"png" };
 
-	if ([mSaveImageAddSuffix intValue] == NSOnState)
+	if ([mSaveImageAddSuffix state] == NSOnState)
 		fpath = [fpath stringByAppendingPathExtension:
 			extensions[fileType]];
 
@@ -154,6 +154,11 @@
 
 	NSString*	fpath  = [panel filename];
 	int			filter = [mPrSessionFilter selectedTag];
+	NSString*	extensions[] = {@"txt", @"ps", @"raw"};
+
+	if ([mPrSessionAddSuffix state] == NSOnState)
+		fpath = [fpath stringByAppendingPathExtension:
+			extensions[filter]];
 
 	if ([mA2 SavePrintSessionAs:filter toFile:fpath])
 	{
@@ -161,7 +166,7 @@
 		return;
 	}
 
-	BeepFor(NO); // and alert!!
+	BeepFor(NO); // and put up an alert!!
 }
 
 //---------------------------------------------------------------------------

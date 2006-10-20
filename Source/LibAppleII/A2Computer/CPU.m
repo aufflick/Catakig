@@ -20,7 +20,7 @@ enum
 	DFLAG(0, D)
 	DFLAG(1, C)
 	DFLAG(2, V)
-	DFLAG(3, ZF)		// when ZF = 1, forces Z = 1
+	DFLAG(3, ZF)		// when ZF = 1, forces Z to read as 1
 	DFLAG(4, LSB)
 
 	kfCD	= kfC | kfD,
@@ -44,7 +44,7 @@ static uint32_t		gSpkrOut[kA2SamplesPerStep + kTapRatio - 1];
 static void FillMemoryMapRow(int8_t map[0x81], uint32_t f, BOOL wmap)
 {/*
 	Utility function used by +_InitCPU (below) to initialize one row of a
-	memory mapping table -- either 'A2T.rmaps' or 'A2T.wmaps'.
+	memory mapping table, either 'A2T.rmaps' or 'A2T.wmaps'.
 */
 #define ORAM(BANK) \
 	offsetof(A2Memory, RAM[page>>5][BANK][page<<8 & 0x1F00])
@@ -88,24 +88,14 @@ static void FillMemoryMapRow(int8_t map[0x81], uint32_t f, BOOL wmap)
 	}
 	else // setting read-map on IIe or earlier
 	{
-		int		c3rom = f>>ksC3ROM & 1;
-		BOOL	c8_internal;
+		int		cx3rom = f>>ksC3ROM & 3;
 
-		PUT_PAGES(0xD0, 0xFF, OROM(0));
-		PUT_PAGES(0xC0, 0xC7, OROM(!cxrom));
-		PUT_PAGES(0xC3, 0xC3, OROM(!cxrom & c3rom));
+		PUT_PAGES(0xC8, 0xFF, OROM(0));
+		PUT_PAGES(0xC0, 0xC7, OROM(cxrom ^ 1));
+		PUT_PAGES(0xC2, 0xC3, OROM("\2\1\0\0"[cx3rom]));
 
-		if (cxrom) // CXROM on, C3ROM irrelevant
-			c8_internal = YES;
-		else if (c3rom) // CXROM off, C3ROM on
-			c8_internal = NO;
-		else // CXROM and C3ROM both off
-			c8_internal = YES; //!! (hotSlot == 3);
-
-		if (c8_internal)
-			PUT_PAGES(0xC8, 0xCF, OROM(0));
-		else
-			PUT_PAGES(0xC8, 0xCF, OROM(1) + 0x800*(hotSlot-1));
+		if (cx3rom == 1  or  (cx3rom == 0  and  hotSlot != 3))
+			PUT_PAGES(0xC8, 0xCF, OROM(1) + 0x800*hotSlot);
 	}
 
 	if (f & (wmap? kfLCWRThi : kfLCRD)) // then $D0-FF sees LC RAM
@@ -149,7 +139,7 @@ static BOOL InitADC_SBC(void)
 	FILE*				fin;
 
 	fin = fopen([[[[NSBundle mainBundle] bundlePath]
-		stringByAppendingPathComponent:@"../ADSBC.dat"]
+		stringByAppendingPathComponent:@"../../ADSBC.dat"]
 		fileSystemRepresentation], "rb");
 	if (fin == NULL)
 		return NO;
@@ -204,15 +194,15 @@ static BOOL InitADC_SBC(void)
 		memcpy(A2T.tADCo, A2T.tADC, sizeof(A2T.tADC));
 		memcpy(A2T.tSBCo, A2T.tSBC, sizeof(A2T.tSBC));
 
-		if (NO) for (int i = 256;  i < LENGTH(A2T.tADCo);  i += 2)
+		for (int i = 256;  i < LENGTH(A2T.tADCo);  i += 2)
 		{
 			A2T.tADCo[i+1] =
-				A2T.tADCo[i  ] & 0xFF00 |
-				A2T.tADCo[i+1] & 0x00FF;
+				A2T.tADC[i  ] & 0xFF00 |
+				A2T.tADC[i+1] & 0x00FF;
 
 			A2T.tSBCo[i+1] =
-				A2T.tSBCo[i  ] & 0xFF00 |
-				A2T.tSBCo[i+1] & 0x00FF;
+				A2T.tSBC[i  ] & 0xFF00 |
+				A2T.tSBC[i+1] & 0x00FF;
 		}
 	}
 
@@ -620,6 +610,7 @@ static BOOL InitADC_SBC(void)
 
 	for (int i = kTapRatio-1;  --i >= 0;)
 		gSpkrOut[i] = (gSpkrOut + kA2SamplesPerStep)[i];
+
 	t = A2T.audio.flat;
 	for (int i = kA2SamplesPerStep;  --i >= 0;)
 		(gSpkrOut + kTapRatio - 1)[i] = t;

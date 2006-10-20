@@ -7,6 +7,9 @@
 #import "LibAppleII.h"
 #import "MyUtils.h"
 
+//---------------------------------------------------------------------------
+//	Macros
+
 #define LENGTH(ARRAY_1D) \
 	( sizeof(ARRAY_1D) / sizeof(ARRAY_1D[0]) )
 	// number of elements in a one-dimensional array
@@ -14,6 +17,11 @@
 #define DFLAG(SHIFT, NAME) \
 	ks##NAME = (SHIFT),  kf##NAME = 1U << ks##NAME,
 	// defines bit-flag constants with ease
+
+#define QCOPY(DEST, SRC, LEN) do { \
+	for (long i = ((long)(LEN))>>2;  --i >= 0;) \
+		((uint32_t*)(DEST))[i] = ((const uint32_t*)(SRC))[i]; \
+	} while (0)
 
 #define IS_OPEN(FD)		((FD) >= 0)
 #define CLOSE(FD)		(close(FD), -1)
@@ -61,8 +69,8 @@ enum
 
 	DFLAG(16, RAMRD)		// flags affecting memory reads
 	DFLAG(17, LCRD)
-	DFLAG(18, CXROM)
-	DFLAG(19, C3ROM)
+	DFLAG(18, C3ROM)
+	DFLAG(19, CXROM)
 	DFLAG(20, HotSlot)
 //	DFLAG(21, HotSlot1)
 //	DFLAG(22, HotSlot2)
@@ -105,8 +113,8 @@ typedef struct A2Memory
 		RAM[8][2][0x2000],	// main and aux RAM (64 KB each)
 		ROM[2][0x4000],		// up to 2 banks of ROM
 
+		mixedSlotROM[0x800],
 		WOM[0x800],			// write-only memory (for ROM writes)
-		altSlotROM[0x800],
 		pad_[0x1000],		// pad struct up to next 0x2000 boundary
 
 		diskBuffers[4][0x2000];

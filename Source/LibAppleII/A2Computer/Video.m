@@ -214,7 +214,6 @@ static void InitBitPatterns(void)
 		char*	tpix = (char*)(A2T.vidPix.TYPE);
 
 	#define BAM_(I)		pout[I] = *(PixelGroup*)(tpix + (bits & kMask))
-
 	#define BAM(I)		BAM_(I);  bits >>= kShift
 
 	#define HLOOP \

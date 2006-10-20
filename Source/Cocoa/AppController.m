@@ -99,7 +99,7 @@
 	{
 		BOOL	hasROM = [A2Computer ModelHasROM:[cell tag]];
 
-		[cell setBackgroundColor:(hasROM? nil : warnColor)];
+		[cell setBackgroundColor:(hasROM? nil : warnColor)]; // 10.4 only!!
 	}
 
 //	Run the "New Apple II" dialog.

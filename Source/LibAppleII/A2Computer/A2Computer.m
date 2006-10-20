@@ -1,8 +1,8 @@
 /*	class A2Computer
 
 	An object representing an Apple II computer.  Methods in this source
-	file are for object allocation, deallocation, initialization, and
-	serialization.
+	file do object allocation, initialization, deallocation, and
+	(eventually) serialization.
 */
 #import "LibAppleII-Priv.h"
 #import "A2DiskDrive.h"
@@ -25,7 +25,7 @@
 	[A2Computer setVersion:1]; //??
 	mlock(&A2T, sizeof(A2T));
 
-	[NSTimer scheduledTimerWithTimeInterval:0.75
+	[NSTimer scheduledTimerWithTimeInterval:0.45
 		target:			[A2Computer class]
 		selector:		@selector(_UpdateClock:)
 		userInfo:		nil
@@ -57,8 +57,10 @@
 	mHalts				= kfHaltNoPower | kfHaltReset;
 	mMemorySize			= sizeof(A2Memory);
 	mPrinter.session	= tmpfile();
-	mSlinky.mask		= (1L << A2G.defaultExtraRAM) - 1;
-	mSlinky.base		= &mSlinky.nowhere;
+	mSlinky.mask		= (1UL << A2G.defaultExtraRAM) - 1;
+	mSlinky.rNowhere	= 0xA0;
+	mSlinky.rBase		= &mSlinky.rNowhere;
+	mSlinky.wBase		= &mSlinky.wNowhere;
 
 	if (mSlinky.mask != 0)
 		mMemorySize += (mSlinky.mask + 1);
@@ -68,7 +70,8 @@
 		return [self Release];
 
 	if (mSlinky.mask != 0)
-		mSlinky.base = (uint8_t*)mMemory + sizeof(A2Memory);
+		mSlinky.rBase = mSlinky.wBase =
+			(uint8_t*)mMemory + sizeof(A2Memory);
 
 //	Create the disk drives, and give every one a track buffer to
 //	work with.
@@ -89,20 +92,27 @@
 
 //---------------------------------------------------------------------------
 
-- (void)_TestThePrinter // called only for debugging!!
+- (void)_TestThePrinter:(BOOL)sampleOutput
 {
-	fputs(
-		"---------1---------2---------3---------4"
-		"---------5---------6---------7---------8\r\n\r\n"
-		" !\"#$%&'()*+,-./0123456789:;<=>?\r\n"
-		"@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_\r\n"
-		"`abcdefghijklmnopqrstuvwxyz{|}~\r\n\r\n"
-		"\x1B\x34Hello world!\x1B@\r\n", mPrinter.session);
-	fprintf(mPrinter.session,
-		"\x1BK\x07%c\1\2\3\4\5\6\7 |\r\n", 0);
-	for (int i = 0;  i < 100;  ++i)
-		fprintf(mPrinter.session, "%d\t%d\r\n", i, i*i);
+	// Called only for debugging!!
 
+	if (sampleOutput)
+	{
+		fputs(
+			"---------1---------2---------3---------4"
+			"---------5---------6---------7---------8\r\n\r\n"
+			" !\"#$%&'()*+,-./0123456789:;<=>?\r\n"
+			"@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_\r\n"
+			"`abcdefghijklmnopqrstuvwxyz{|}~\r\n\r\n"
+			"\x1B\x34Hello world!\x1B@\r\n", mPrinter.session);
+		fprintf(mPrinter.session,
+			"\x1BK\x07%c\1\2\3\4\5\6\7 |\r\n", 0);
+		for (int i = 0;  i < 100;  ++i)
+			fprintf(mPrinter.session, "%d\t%d\r\n", i, i*i);
+	}
+
+	[self SavePrintSessionAs:kA2PFVerbatim
+		toFile:@"/Users/klipsch/Desktop/printout.raw"];
 	[self SavePrintSessionAs:kA2PFPlain
 		toFile:@"/Users/klipsch/Desktop/printout.txt"];
 	[self SavePrintSessionAs:kA2PFEpsonToPS
@@ -113,7 +123,7 @@
 
 - (void)dealloc
 {
-//	[self _TestThePrinter];
+//	[self _TestThePrinter:NO];
 
 	for (int dd = 4;  --dd >= 0;)
 		[mIWM[dd>>1].drive[dd&1] release];

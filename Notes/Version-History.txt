@@ -1,0 +1,28 @@
+==== 2.00b3, 2006-10-20 ====
+
+Fixed broken ROM scanning on many Mac models.  [Now using 'crc32' instead of
+'adler32', both from 'zlib'.  Also reverted back to C FILE pointers after
+having tried NSInputStreams to no great advantage.]  
+
+Added recognition of Revision-00 IIc ROM.
+
+Improved intelligence of the memory card firmware in slot 4.  Added more
+error detection.  Implemented more authentic behavior when the memory
+isn't there (when the user has selected "Extra RAM: None").
+
+Fixed some bad code in the printer firmware that mangled CR behavior and
+other character output.  This bug affected pre-IIc models only.
+
+In the "Save Printer Session" dialog, the "Add suffix" checkbox had no
+actual effect.  Fixed.
+
+Fixed IIe memory mapping behavior in the $C100-C7FF area.
+
+Removed bogus menu commands related to document files.  The saving and
+restoring of Apple II states isn't supported yet.  Also removed the "Help"
+menu, as there is no in-line help yet.
+
+
+==== 2.00b2, 2006-10-17 ====
+
+The first (advertised) public release.
