@@ -42,6 +42,22 @@
 
 //---------------------------------------------------------------------------
 
+static void RandomizeVideoMemory(void* ram, unsigned model)
+{
+	for (int i = 0x6000;  --i >= 0;)
+		((uint16_t*)ram)[i] = A2Random16();
+
+	if (model == kA2ModelIIo)
+	{
+		uint32_t*	p = (uint32_t*)ram;
+
+		for (int i = 0x400/4;  i < 0xC00/4;  ++i)
+			p[i] = p[i] & 0x01010101 | 0xBEBEBEBE;
+	}
+}
+
+//---------------------------------------------------------------------------
+
 - (id)init
 {/*
 	"Add your subclass-specific initialization here.  If an error occurs,
@@ -80,11 +96,7 @@
 		mIWM[dd>>1].drive[dd&1] = [[A2DiskDrive alloc]
 			InitUsingBuffer: mMemory->diskBuffers[dd] ];
 
-//	Initialize video memory with random bytes (a theatrical effect).
-
-	for (int i = 0x6000;  --i >= 0;)
-		((uint16_t*)(mMemory->RAM))[i] = A2Random16();
-
+	RandomizeVideoMemory(mMemory->RAM, mModel);
 	madvise(mMemory, mMemorySize, MADV_SEQUENTIAL);
 	[self _PrepareModel];
 	return self;

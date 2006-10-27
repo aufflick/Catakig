@@ -1,7 +1,7 @@
 /*	MyUtils.h
 
-	My own (CK's) generally useful additions to the Cocoa/GNUstep classes
-	-- not specific to any particular project.
+	My own (CK's) generally useful additions to the Cocoa/GNUstep classes,
+	which are not specific to any particular project.
 */
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>

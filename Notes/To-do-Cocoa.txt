@@ -22,8 +22,8 @@
 * Are we capturing screens in the best and fastest way?
 * Drag & Drop disk slots
 * File filtering is slow when opening disk images.
-* Add sound recording.
-* Add QuickTime movie recording.
+* Add recording sound to files.
+* Add recording QuickTime movies.
 
 
 ==== Miscellany ====

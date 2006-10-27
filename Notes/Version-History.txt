@@ -1,26 +1,34 @@
+
+==== 2.00b4, 2006-10-27 ====
+
+Streamlined the Epson dot-matrix printer font.  The PFA file is about 50 KB smaller, down from 150, which slims PostScript output files by the same amount.
+
+Also, Catakig's PostScript files can now be opened with Apple's Preview application.  This makes viewing them, printing them, and saving them to PDF much more convenient, at least for MacOS X users.  [Achieved this by making the output DSC-compliant.]
+
+Added recognition of the Revision-04 //c ROM.  Thanks to Nick W.
+
+Fixed (probably) a flashing-border bug that could happen in full-screen mode.
+
+The "Full Screen" menu command's shortcut is changed to ctrl-F9, to help avoid conflicts with Apple's shortcuts for Expose.  It's probably not a permanent solution to the problem however.
+
+A small cosmetic change: the Apple ][ model now starts up with a screen full of '?' and '>' characters, instead of completely random characters.  This more closely mimics the behavior of the real machines.
+
+
 ==== 2.00b3, 2006-10-20 ====
 
-Fixed broken ROM scanning on many Mac models.  [Now using 'crc32' instead of
-'adler32', both from 'zlib'.  Also reverted back to C FILE pointers after
-having tried NSInputStreams to no great advantage.]  
+Fixed ROM file scanning, which was broken on many Mac models.  [Now using 'crc32' to compute checksums instead of 'adler32'.  Both functions are from 'zlib', but apparently 'adler32' can return different sums on different platforms.  Also reverted to using C FILEs after having tried NSInputStreams to no great advantage.]  
 
-Added recognition of Revision-00 IIc ROM.
+Added recognition of the Revision-00 //c ROM.  Thanks to Brian N.
 
-Improved intelligence of the memory card firmware in slot 4.  Added more
-error detection.  Implemented more authentic behavior when the memory
-isn't there (when the user has selected "Extra RAM: None").
+Improved intelligence of the memory card firmware in slot 4.  Added more error detection.  Implemented more authentic behavior when the memory isn't there (when the user has selected "Extra RAM: None").
 
-Fixed some bad code in the printer firmware that mangled CR behavior and
-other character output.  This bug affected pre-IIc models only.
+Fixed some bad code in the printer firmware that mangled CR behavior and other character output.  This bug affected pre-//c models only.
 
-In the "Save Printer Session" dialog, the "Add suffix" checkbox had no
-actual effect.  Fixed.
+In the "Save Printer Session" dialog, the "Add suffix" checkbox had no actual effect.  Fixed.
 
-Fixed IIe memory mapping behavior in the $C100-C7FF area.
+Fixed incorrect //e memory mapping behavior in the $C100-C7FF area.
 
-Removed bogus menu commands related to document files.  The saving and
-restoring of Apple II states isn't supported yet.  Also removed the "Help"
-menu, as there is no in-line help yet.
+Removed bogus menu commands related to document files.  The saving and restoring of Apple II states is not implemented yet.  Also removed the cruelly deceitful Help menu, as there is no in-line help at present.
 
 
 ==== 2.00b2, 2006-10-17 ====

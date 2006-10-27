@@ -9,7 +9,10 @@
 //---------------------------------------------------------------------------
 
 - (NSOpenGLContext*)MakeCurrentContext
-{
+{/*
+	Makes this context the current one, returning whatever was the previous
+	current context.
+*/
 	NSOpenGLContext*	prev = [NSOpenGLContext currentContext];
 
 	[self makeCurrentContext];

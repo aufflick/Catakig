@@ -11,6 +11,29 @@
 static int			input(void);
 //static uint8_t		gEpsonFontForStyle[0x2FF + 1];
 
+static const char* gEpson1 =
+	"%!PS-Adobe-3.0\n"
+//	"%%DocumentData: Binary\n"
+	"%%LanguageLevel: 2\n"
+	"%%Orientation: Portrait\n"
+	"%%DocumentSuppliedResources: font Ibsen  procset MyProcs\n"
+	"%%EndComments\n\n"
+	"%%BeginProlog\n"
+	"%%BeginResource: procset MyProcs\n";
+
+static const char* gEpson2 =
+	"%%EndResource\n"
+	"%%EndProlog\n\n"
+	"%%BeginSetup\n"
+	"%%BeginResource: font Ibsen\n";
+
+static const char* gEpson3 =
+	"%%EndResource\n"
+	"%%EndSetup\n"
+	"BeginDocument\n\n";
+	
+enum { kUseDSC = YES }; // experimental!!
+
 //---------------------------------------------------------------------------
 
 static void EpsonText(BOOL trailingRubouts)
@@ -23,7 +46,7 @@ static void EpsonText(BOOL trailingRubouts)
 		char	ch = yytext[i];
 
 		if (ch == '('  or  ch == ')'  or  ch == '\\')
-			fputc('\\', yyout);
+			putc('\\', yyout);
 		putc(ch, yyout);
 	}
 	fputs(") T", yyout);
@@ -41,7 +64,7 @@ static void EpsonGraphics(int mode)
 	if (nbytes < 1)
 		return;
 
-	fputs("\n<7F80 ", yyout);
+	fputs("\n<0000 ", yyout);
 	while (--nbytes >= 0  and  EOF != (data = input()))
 	{
 		putc(hexDigit[data >> 4], yyout);
@@ -52,10 +75,11 @@ static void EpsonGraphics(int mode)
 
 %} --------------------------------------------------------------------------
 
-ESC			\x1B
 ANY			[\0-\x7F]
 ANY2		{ANY}{2}
 ANY3		{ANY}{3}
+ESC			\x1B
+_01			[01\0\1]
 
 %%
 %{
@@ -67,7 +91,7 @@ ANY3		{ANY}{3}
 %}
 
 <EpsonRX>{
-	<<EOF>>				fputs("\nshowpage\n", yyout);  return;
+	<<EOF>>				return;
 	{ESC}[@] {			fputs("\nReset\n", yyout);
 						charset = 0;  gcharset = NO;
 	}
@@ -84,20 +108,19 @@ ANY3		{ANY}{3}
 	{ESC}[01245EFGHMOPT] {
 		fprintf(yyout, "  E-%c", yytext[1]);
 	}
-	{ESC}?[\x0F\x12\x0E\x14] {
-		fprintf(yyout, "  C-%c", yytext[yyleng-1] | '@');
-	}
-	{ESC}[-SW][01\0\1] {
+	{ESC}[-SW]{_01} {
 		fprintf(yyout, "  E-%c%c", yytext[1], yytext[2] | '0');
 	}
+	{ESC}?[\x0E\x0F\x12\x14] {
+		fprintf(yyout, "  C-%c", yytext[yyleng-1] | '@');
+	}
 	{ESC}C\0{ANY} |
-	{ESC}[ef][01]{ANY} {
+	{ESC}[ef]{_01}{ANY} {
 		fprintf(yyout, "  %d E-%c%c", yytext[3], yytext[1], yytext[2]|'0');
 	}
 	{ESC}[3ACJNQl]{ANY} {
 		fprintf(yyout, "  %d E-%c", yytext[2], yytext[1]);
 	}
-
 	\x08+|\x09+|\x0A+|\x0B+|\x0C+|\x0D+ {
 		fprintf(yyout, "  %d C-%c", yyleng, yytext[0] | '@');
 	}
@@ -109,17 +132,17 @@ ANY3		{ANY}{3}
 	{ESC}[*]{ANY3} |
 	{ESC}[ef]{ANY2} |
 	{ESC}[-SRUWms]{ANY} |
-	{ESC}{ANY}				; // invalid sequences, skipped
+	{ESC}{ANY}				; // catch and skip invalid sequences
 }
 
 <INITIAL>{
 	[\n\t\v\f]+ |
-	[\x20-\x7E]+			ECHO;
+	[\x20-\x7E]+		ECHO; // state INITIAL is the ASCII filter
 }
 
 <*>{
-	{ANY}				; // ignored if not handled above
-	<<EOF>>				return;
+	{ANY}		;
+	<<EOF>>		return;
 }
 
 %%
@@ -163,7 +186,7 @@ ANY3		{ANY}{3}
 - (long)SizeOfPrintSession
 {/*
 	Returns the number of bytes that have accumulated so far in the
-	printer session.
+	print session.
 */
 	fflush(mPrinter.session); // (probably unnecessary)
 	return ftell(mPrinter.session);
@@ -173,8 +196,8 @@ ANY3		{ANY}{3}
 
 - (void)ClearPrintSession
 {/*
-	Clears (purges) the printer session.  All data bytes that this printer
-	has received are discarded.
+	Clears the print session, discarding all bytes that this printer
+	has received up until now.
 */
 	fflush(mPrinter.session);
 	fseek(mPrinter.session, 0, SEEK_SET);
@@ -204,9 +227,24 @@ ANY3		{ANY}{3}
 		break;
 
 	  case kA2PFEpsonToPS:
-		A2AppendResourceFile(fileno(yyout), @"Ibsen.pfa");
-		A2AppendResourceFile(fileno(yyout), @"IbsenUtils.ps");
-		yylex(filter);
+		if (kUseDSC)
+		{
+			fputs(gEpson1, yyout);  fflush(yyout);
+			A2AppendResourceFile(fileno(yyout), @"IbsenUtils.ps");
+			fputs(gEpson2, yyout);  fflush(yyout);
+			A2AppendResourceFile(fileno(yyout), @"Ibsen.pfa");
+			fputs(gEpson3, yyout);  fflush(yyout);
+			yylex(filter);
+			fputs("\n%%Trailer\nEndDocument\n%%EOF\n", yyout);
+		}
+		else
+		{
+			A2AppendResourceFile(fileno(yyout), @"Ibsen.pfa");
+			A2AppendResourceFile(fileno(yyout), @"IbsenUtils.ps");
+			fputs("BeginDocument\n", yyout);
+			yylex(filter);
+			fputs("EndDocument\n", yyout);
+		}
 		break;
 
 	  case kA2PFPlain:

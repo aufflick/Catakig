@@ -157,7 +157,7 @@ extern struct A2PrivateTables
 extern "C" {
 #endif
 
-BOOL		A2AppendResourceFile(fd_t fout, NSString* resName);
+BOOL		A2AppendResourceFile(fd_t, NSString* resName);
 void		A2DumpArray(const char*, const void*, size_t, int);
 unsigned	A2GleanFileFormat(const void* header, size_t size);
 unsigned	A2HitIWM(A2IWM* iwm, unsigned ea, unsigned d);

@@ -93,8 +93,8 @@ static GLuint MakeTextureObject(void)
 
 static void BlessThisContext(NSOpenGLContext* context) //!!
 {/*
-	Sets up an OpenGLContext the way we like it.  Also makes 'context'
-	the current context and leaves it that way on exit.
+	Sets up an OpenGLContext the way we like it.  Also makes the context
+	the current one, leaving it that way on return.
 */
 	[context makeCurrentContext];
 	[context SetSwapInterval:1L];
@@ -160,14 +160,14 @@ static NSOpenGLContext* MakeFullScreenContext(CGDirectDisplayID dpy)
 		initWithAttributes:pixFmtAttrs]) autorelease];
 	context = [[NSOpenGLContext alloc]
 		initWithFormat:pixFmt shareContext:nil];
+	[context setFullScreen];
 
 	BlessThisContext(context);
 	MakeDisplayList();
 	glBindTexture(GL_TEXTURE_2D, MakeTextureObject());
-	GL_PrepareViewport(CGDisplayPixelsWide(dpy), CGDisplayPixelsHigh(dpy));
 	GL_ClearBothBuffers();
+	GL_PrepareViewport(CGDisplayPixelsWide(dpy), CGDisplayPixelsHigh(dpy));
 
-	[context setFullScreen];
 	return context;
 }
 

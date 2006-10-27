@@ -221,9 +221,9 @@
 		287231B70A877A8E006AA610 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				286BC2C40AE685EE00A01672 /* release.xcconfig */,
-				286BC2C50AE685EE00A01672 /* debug.xcconfig */,
 				286BC2C60AE685EE00A01672 /* common.xcconfig */,
+				286BC2C50AE685EE00A01672 /* debug.xcconfig */,
+				286BC2C40AE685EE00A01672 /* release.xcconfig */,
 				287233810A87859D006AA610 /* Prefix.pch */,
 				280F4D2D0A89017C000B3B80 /* Cocoa */,
 				2872382C0A87B16B006AA610 /* LibAppleII */,

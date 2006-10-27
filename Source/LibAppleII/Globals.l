@@ -183,14 +183,13 @@ BOOL A2AppendResourceFile(fd_t fout, NSString* resName)
 	Searches the application bundle for a given resource file, then
 	appends its content to the given destination file.
 */
-	NSString*   fpath;
+	NSString*   fpath = [resName PathForResource];
 	fd_t		fin;
 
-	fpath = [resName PathForResource];
 	if (fpath == nil)
 		return NO;
 
-	fin = open([fpath fileSystemRepresentation], O_RDONLY);
+	fin = open([fpath fileSystemRepresentation], O_RDONLY|O_NONBLOCK);
 	if (fin < 0)
 		return NO;
 

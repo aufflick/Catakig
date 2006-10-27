@@ -1,7 +1,7 @@
 // 'common.xcconfig' -- a set of common XCode configration settings
 // shared by all targets.
 
-App_Version					= 2.00b3
+App_Version					= 2.00b4
 
 PRODUCT_NAME				= Catakig
 WRAPPER_EXTENSION			= app

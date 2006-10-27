@@ -76,7 +76,7 @@ static struct // the ROM repository
 		return gROM.IIcpMain[0]  and  gROM.IIcpAlt[0];
 	}
 
-	return NO; // means model code isn't valid
+	return NO; // means 'modelCode' isn't valid
 }
 
 //---------------------------------------------------------------------------
@@ -92,10 +92,10 @@ static struct // the ROM repository
 		return;
 
 	if (slotROM != nil)
-		memcpy((mMemory->ROM[1]) + 0x100*slotNum, slotROM, 0x100);
+		memcpy(mMemory->ROM[1] + 0x100*slotNum, slotROM, 0x100);
 
 	if (expansionROM != nil)
-		memcpy((mMemory->ROM[1]) + 0x800*slotNum, expansionROM, 0x800);
+		memcpy(mMemory->ROM[1] + 0x800*slotNum, expansionROM, 0x800);
 }
 
 //---------------------------------------------------------------------------
@@ -222,10 +222,14 @@ static struct // the ROM repository
 			CASE(AA2342E8, IIo)
 			CASE(B9E3B093, IIpD0)			CASE(79135697, IIpD5)
 			CASE(40375280, IIeC1)			CASE(1DB83E23, IIeD5)
-			CASE(24F39DF7, IIcpMain)		CASE(F768C5C3, IIcpAlt)
+		//	CASE(24F39DF7, IIcpMain)		CASE(F768C5C3, IIcpAlt)
 
-			case 0x816CDA70:  CASE(228C4909, IIcMain)
-			case 0xFA9D7930:  CASE(DC459600, IIcAlt)
+			case 0x816CDA70: // rev. 00
+			CASE(228C4909, IIcMain) // rev. 03 and 04
+
+			case 0xFA9D7930: // rev. 00
+			case 0xF768C5C3: // rev. 04 (also IIcpAlt!!)
+			CASE(DC459600, IIcAlt) // rev. 03
 
 			CASE(CE7144F6, DiskII)
 			CASE(BA81A559, Mouse)
@@ -238,7 +242,7 @@ static struct // the ROM repository
 		memcpy(dest, chunk, chunkSize);
 		fread(dest+chunkSize, 1, len-chunkSize, fin);
 
-		if (dest == gROM.IIpD0)
+		if (crc == 0xB9E3B093) // IIpD0
 			memcpy(gROM.IIeD0, dest, len);
 	}
 

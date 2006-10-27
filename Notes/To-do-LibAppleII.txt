@@ -26,6 +26,7 @@
 * Implement the "bizarre" (and useless) GR video mode?
 * Simulate color burst for text in graphics mode.
 * Implement Videx 80-column card for IIo and IIp models?
+* IIo and IIp text video still isn't entirely authentic.
 
 
 ==== Audio ====
@@ -41,9 +42,8 @@
 * Support BZ- and GZ-compressed disk image files.
 * Use track size of 6384-6400 bytes instead of 6656?
 * Infer DO/PO format of 140K disks by examining their contents.
-* On computer Reset, does the IWM mode register revert to 0?
-* Update checksum on modified DiskCopy 4 images.
 * Does IWM mode register change after RESET?
+* Update checksum on modified DiskCopy 4 images.
 * Support FDI disk images?  NB2?
 * Forbid Disk II drives accepting 2IMG-PO disks > 140 KB.
 * On real Apple II with IWM, verify IWM status register value under all
@@ -60,6 +60,7 @@
 * The Flex scanner is not re-entrant, and not thread-safe.  Use 're2c'?
 * Output PS should be friendly to A4 paper sizes, and PDF distilling.
 * Use PDF-lib library for printing to PDF?
+* Let user select ribbon ink color.
 * Preferences:
 	LF after CR, yes or no
 	7 or 8 bit data path

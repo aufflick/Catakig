@@ -26,7 +26,7 @@ enum
 	kA2DiskReadOnly,
 	kA2DiskReadWrite,
 
-	kA2PFPlain = 0,			// printer I/O filters
+	kA2PFPlain = 0,			// printer session filters
 	kA2PFEpsonToPS,
 //	kA2PFScribeToPS,
 	kA2PFVerbatim,
@@ -37,7 +37,7 @@ enum
 	kfA2LightDDrive3	= 1<<3,
 	kfA2LightPrinter	= 1<<4,
 
-	kfA2Button0			= 1,		// button & mod-key states
+	kfA2Button0			= 1,		// button and modifier-key states
 	kfA2Button1			= 1<<1,
 	kfA2Button2			= 1<<2,
 	kfA2ButtonMouse		= 1<<3,
@@ -133,7 +133,7 @@ extern struct A2Globals
 	int16_t				*mTblADC,		// this model's ADC and SBC tables
 						*mTblSBC;
 
-	uint8_t				mVideoFlags[262];	// video flags for each scanline
+	uint8_t				mVideoFlags[262];	// video flags at each scanline
 
 	//-----------------	Peripherals -----------------
 
@@ -174,7 +174,8 @@ extern struct A2Globals
 @end
 
 //---------------------------------------------------------------------------
-//	The various methods of A2Computer, grouped by category.
+//	The various methods of A2Computer, grouped by category (and separate
+//	source files).
 
 @interface A2Computer (Audio)
 
