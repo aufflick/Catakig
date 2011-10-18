@@ -8,6 +8,8 @@
 #import "ScreenView.h"
 #import "IndicatorLight.h"
 
+#import <Carbon/Carbon.h>
+
 @implementation ScreenView
 //---------------------------------------------------------------------------
 
